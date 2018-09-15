@@ -1,5 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
+import Router from 'next/router'
+import { auth } from '../firebase'
 
 export default () => (
   <div className="navbar">
@@ -8,6 +10,11 @@ export default () => (
     <Link href="/login">
       <a className="login-link">Login</a>
     </Link>
+
+    {/* This is temporary */}
+    <a href="#" className="login-link" onClick={() => auth.signOut().then(() => Router.push('/'))}>
+      Sair
+    </a>
 
     <style jsx>{`
       .navbar {

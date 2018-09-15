@@ -7,7 +7,7 @@ export default class MyDocument extends Document {
         return <html>
                     <head>
                         <link rel="stylesheet" href="/_next/static/style.css" />
-                        <link rel="stylesheet" href="./static/css/font-use.css" />
+                        <link rel="stylesheet" href="./static/css/style.css" />
                         <link href = "https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel = "stylesheet" />
                     </head>
                     <Head>

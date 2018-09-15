@@ -1,11 +1,12 @@
+import randomstring from 'randomstring'
 import { db } from './firebase'
 
-// User API
-
-export const doCreateUser = (id, username, email) =>
+export const registerUser = (id, email) => {
+  // The integrationCode will be utilized later
+  // to link the user with a summoner name
+  const integrationCode = randomstring.generate()
   db.ref(`users/${id}`).set({
-    username,
     email,
+    integrationCode,
   })
-
-export const onceGetUsers = () => db.ref('users').once('value')
+}

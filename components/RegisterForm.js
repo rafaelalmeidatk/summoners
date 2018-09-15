@@ -1,7 +1,9 @@
 import React from 'react'
+import Link from 'next/link'
 import { Button, Form } from 'reactstrap'
 import { withFormik } from 'formik'
 
+import { auth, db } from '../firebase'
 import yup from '../lib/yup'
 import FormGroupBordered from './FormGroupBordered'
 
@@ -16,13 +18,29 @@ const formikEnhancer = withFormik({
       .string()
       .min(6, 'Password should have at least 6 characters')
       .required('Password is required'),
+
+    cpassword: yup
+      .string()
+      .sameAs(yup.ref('password'), 'Passwords do not match')
+      .required('Password confirmation is required'),
   }),
   handleSubmit: (values, { props, setStatus, setSubmitting }) => {
-    console.log('submit!', values)
+    const { email, password } = values
+
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(authUser => db.registerUser(authUser.user.uid, email))
+      .then(() => {
+        console.log('Success!')
+        // TODO: Redirect to account page
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
   },
 })
 
-const LoginForm = props => {
+const RegisterForm = props => {
   const { touched, errors, handleChange, handleBlur, handleSubmit, isSubmitting } = props
 
   const getErrors = param => {
@@ -53,25 +71,48 @@ const LoginForm = props => {
         onBlur={handleBlur}
       />
 
-      <Button block type="submit" size="lg" className="btn-login" disabled={isSubmitting}>
-        Login
+      <FormGroupBordered
+        id="cpassword"
+        type="password"
+        label="Repeat the password"
+        placeholder=""
+        errorMessage={getErrors('cpassword')}
+        invalid={!!getErrors('cpassword')}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+
+      <Button block type="submit" size="lg" className="btn-register" disabled={isSubmitting}>
+        Register
       </Button>
 
-      <Button outline color="secondary" size="lg" block>
-        Dont have account? Register
-      </Button>
+      <p className="register-text">
+        Already have an account?{' '}
+        <Link href="/login">
+          <a className="register-link">Login</a>
+        </Link>
+      </p>
 
       <style jsx global>{`
         .form {
           width: 100%;
         }
-        .btn-login {
-          background: #a65fc5;
+        .btn-register {
+          background: #0f2e43;
+          border: 0;
           margin-top: 25px;
+        }
+        .register-text {
+          margin-top: 20px;
+          text-align: center;
+        }
+        .register-text a {
+          color: white;
+          font-weight: bold;
         }
       `}</style>
     </Form>
   )
 }
 
-export default formikEnhancer(LoginForm)
+export default formikEnhancer(RegisterForm)

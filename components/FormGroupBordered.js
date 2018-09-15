@@ -1,14 +1,15 @@
 import React from 'react'
-import { FormGroup, Label, Input } from 'reactstrap'
+import { FormGroup, FormFeedback, Label, Input } from 'reactstrap'
 
 class FormGroupBordered extends React.Component {
   render() {
-    const { label, ...props } = this.props
+    const { label, errorMessage, ...props } = this.props
 
     return (
       <FormGroup className="form-group">
         <Label>{label}</Label>
         <Input {...props} className="input" />
+        {errorMessage && <FormFeedback>{errorMessage}</FormFeedback>}
 
         <style jsx global>{`
           .form-control,

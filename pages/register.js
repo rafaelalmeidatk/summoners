@@ -10,16 +10,16 @@ class RegisterPage extends React.Component {
     return (
       <Container fluid>
         <Row>
-          <Col lg="4" className="login-wrapper">
+          <Col lg="4" className="register-wrapper">
             <Logo width="100px" margin="45px 0" />
             <RegisterForm />
           </Col>
-          <Col lg="8" className="login-cta">
+          <Col lg="8" className="register-cta">
             <Title align="right" />
           </Col>
         </Row>
         <style jsx global>{`
-          .login-wrapper {
+          .register-wrapper {
             min-height: 100vh;
             padding: 35px;
             display: flex;
@@ -27,7 +27,7 @@ class RegisterPage extends React.Component {
             align-items: center;
             justify-content: center;
           }
-          .login-cta {
+          .register-cta {
             background: url('./static/img/bg_img/bg.jpg') no-repeat center center / cover;
             min-height: 100vh;
             padding: 45px;

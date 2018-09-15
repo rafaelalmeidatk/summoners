@@ -1,10 +1,11 @@
-import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import React from 'react'
+import { Container, Row, Col } from 'reactstrap'
 
-import Navbar from '../components/Navbar';
+import withAuthorization from '../lib/withAuthorization'
+import Navbar from '../components/Navbar'
 import LoLAccountIntegration from '../components/LoLAccountIntegration'
 
-export default () => (
+const AccountPage = () => (
   <div className="container-wrapper">
     <Container className="container">
       <Navbar />
@@ -33,4 +34,6 @@ export default () => (
       }
     `}</style>
   </div>
-);
+)
+
+export default withAuthorization(AccountPage)

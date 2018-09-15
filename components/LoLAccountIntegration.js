@@ -9,6 +9,7 @@ class LoLAccountIntegration extends React.Component {
 
   componentDidMount() {
     const { user } = this.props
+    console.log('dm', user);
     if (!user) {
       return this.setState({ loading: false })
     }

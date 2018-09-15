@@ -10,3 +10,11 @@ export const registerUser = (id, email) => {
     integrationCode
   });
 };
+
+export const getUserData = id => {
+  return new Promise(resolve => {
+    db.ref(`users/${id}`)
+      .once('value')
+      .then(snapshot => resolve(snapshot.val()));
+  });
+};

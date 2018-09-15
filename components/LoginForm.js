@@ -1,47 +1,77 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form } from 'reactstrap';
+import { withFormik } from 'formik';
+
+import yup from '../lib/yup';
 import FormGroupBordered from './FormGroupBordered';
 
-class LoginForm extends React.Component {
-  borderChange = () => this.FormGroupBordered.changeBorder();
+const formikEnhancer = withFormik({
+  validationSchema: yup.object().shape({
+    email: yup
+      .string()
+      .email('Invalid email address')
+      .required('Email is required'),
 
-  render() {
-    return (
-      <Form className="form">
-        <FormGroupBordered
-          type="text"
-          label="Summoner Name"
-          placeholder=""
-          ref={node => (this.FormGroupBordered = node)}
-          onFocus={this.borderChange}
-          onBlur={this.borderChange}
-        />
-        <FormGroupBordered
-          type="password"
-          label="Password"
-          placeholder=""
-          ref={node => (this.FormGroupBordered = node)}
-          onFocus={this.borderChange}
-          onBlur={this.borderChange}
-        />
-        <Button size="lg" className="btn-login" block>
-          Login
-        </Button>
-        <Button outline color="secondary" size="lg" block>
-          Dont have account? Register
-        </Button>
-        <style jsx global>{`
-          .form {
-            width: 100%;
-          }
-          .btn-login {
-            background: #a65fc5;
-            margin-top: 25px;
-          }
-        `}</style>
-      </Form>
-    );
+    password: yup
+      .string()
+      .min(6, 'Password should have at least 6 characters')
+      .required('Password is required')
+  }),
+  handleSubmit: (values, { props, setStatus, setSubmitting }) => {
+    console.log('submit!', values);
   }
-}
+});
 
-export default LoginForm;
+const LoginForm = (props) => {
+  const { touched, errors, handleChange, handleBlur, handleSubmit, isSubmitting } = props;
+
+  const getErrors = param => {
+    return errors[param] && touched[param] ? errors[param] : '';
+  };
+
+  return (
+    <Form className="form" onSubmit={handleSubmit}>
+      <FormGroupBordered
+        id="email"
+        type="text"
+        label="Email"
+        placeholder=""
+        errorMessage={getErrors('email')}
+        invalid={!!getErrors('email')}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+
+      <FormGroupBordered
+        id="password"
+        type="password"
+        label="Password"
+        placeholder=""
+        errorMessage={getErrors('password')}
+        invalid={!!getErrors('password')}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+
+      <Button block type="submit" size="lg" className="btn-login" disabled={isSubmitting}>
+        Login
+      </Button>
+
+      <Button outline color="secondary" size="lg" block>
+        Dont have account? Register
+      </Button>
+
+      <style jsx global>{`
+        .form {
+          width: 100%;
+        }
+        .btn-login {
+          background: #a65fc5;
+          margin-top: 25px;
+        }
+      `}</style>
+    </Form>
+  );
+};
+
+export default formikEnhancer(LoginForm);

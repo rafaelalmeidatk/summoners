@@ -6,7 +6,7 @@ import { withFormik } from 'formik';
 import yup from '../lib/yup';
 import FormGroupBordered from './FormGroupBordered';
 
-const formikEnhanced = withFormik({
+const formikEnhancer = withFormik({
   validationSchema: yup.object().shape({
     email: yup
       .string()
@@ -29,7 +29,7 @@ const formikEnhanced = withFormik({
 });
 
 const RegisterForm = props => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit, isSubmitting } = props;
+  const { touched, errors, handleChange, handleBlur, handleSubmit, isSubmitting } = props;
 
   const getErrors = param => {
     return errors[param] && touched[param] ? errors[param] : '';
@@ -103,4 +103,4 @@ const RegisterForm = props => {
   );
 };
 
-export default formikEnhanced(RegisterForm);
+export default formikEnhancer(RegisterForm);

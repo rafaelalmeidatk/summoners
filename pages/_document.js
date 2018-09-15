@@ -15,10 +15,11 @@ export default class MyDocument extends Document {
                         <meta charSet="utf-8" />
                     </Head>
 
-                    <body>
-                        <Main />
-                        <NextScript />
-                    </body>
-                </html>
-    }
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </html>
+    );
+  }
 }

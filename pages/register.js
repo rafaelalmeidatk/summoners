@@ -1,9 +1,9 @@
-import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import React from 'react'
+import { Container, Row, Col } from 'reactstrap'
 
-import Logo from '../components/Logo';
-import Title from '../components/Title';
-import RegisterForm from '../components/RegisterForm';
+import Logo from '../components/Logo'
+import Title from '../components/Title'
+import RegisterForm from '../components/RegisterForm'
 
 class RegisterPage extends React.Component {
   render() {
@@ -37,8 +37,8 @@ class RegisterPage extends React.Component {
           }
         `}</style>
       </Container>
-    );
+    )
   }
 }
 
-export default RegisterPage;
+export default RegisterPage

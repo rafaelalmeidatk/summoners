@@ -1,9 +1,9 @@
-import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import React from 'react'
+import { Container, Row, Col } from 'reactstrap'
 
-import Logo from '../components/Logo';
-import Title from '../components/Title';
-import LoginForm from '../components/LoginForm';
+import Logo from '../components/Logo'
+import Title from '../components/Title'
+import LoginForm from '../components/LoginForm'
 
 class LoginPage extends React.Component {
   render() {
@@ -37,8 +37,8 @@ class LoginPage extends React.Component {
           }
         `}</style>
       </Container>
-    );
+    )
   }
 }
 
-export default LoginPage;
+export default LoginPage

@@ -1,6 +1,6 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/database'
 
 let config = {
   apiKey: 'AIzaSyCsuHpc_FERR813x2kMepmikEPphQKzbpk',
@@ -8,14 +8,14 @@ let config = {
   databaseURL: 'https://summoners-4f7e5.firebaseio.com',
   projectId: 'summoners-4f7e5',
   storageBucket: 'summoners-4f7e5.appspot.com',
-  messagingSenderId: '539192227824'
-};
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(config);
+  messagingSenderId: '539192227824',
 }
 
-const db = firebase.database();
-const auth = firebase.auth();
+if (!firebase.apps.length) {
+  firebase.initializeApp(config)
+}
 
-export { db, auth };
+const db = firebase.database()
+const auth = firebase.auth()
+
+export { db, auth }

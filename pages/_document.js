@@ -1,6 +1,6 @@
-import React from "react";
-import Document, { Head, Main, NextScript } from "next/document";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React from 'react'
+import Document, { Head, Main, NextScript } from 'next/document'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default class MyDocument extends Document {
   render() {
@@ -24,6 +24,6 @@ export default class MyDocument extends Document {
           <NextScript />
         </body>
       </html>
-    );
+    )
   }
 }

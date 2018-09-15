@@ -1,9 +1,9 @@
-import React from 'react';
-import { FormGroup, FormFeedback, Label, Input } from 'reactstrap';
+import React from 'react'
+import { FormGroup, FormFeedback, Label, Input } from 'reactstrap'
 
 class FormGroupBordered extends React.Component {
   render() {
-    const { label, errorMessage, ...props } = this.props;
+    const { label, errorMessage, ...props } = this.props
 
     return (
       <FormGroup className="form-group">
@@ -46,8 +46,8 @@ class FormGroupBordered extends React.Component {
           }
         `}</style>
       </FormGroup>
-    );
+    )
   }
 }
 
-export default FormGroupBordered;
+export default FormGroupBordered

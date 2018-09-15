@@ -1,9 +1,9 @@
-import React from 'react';
-import { Button, Form } from 'reactstrap';
-import { withFormik } from 'formik';
+import React from 'react'
+import { Button, Form } from 'reactstrap'
+import { withFormik } from 'formik'
 
-import yup from '../lib/yup';
-import FormGroupBordered from './FormGroupBordered';
+import yup from '../lib/yup'
+import FormGroupBordered from './FormGroupBordered'
 
 const formikEnhancer = withFormik({
   validationSchema: yup.object().shape({
@@ -15,19 +15,19 @@ const formikEnhancer = withFormik({
     password: yup
       .string()
       .min(6, 'Password should have at least 6 characters')
-      .required('Password is required')
+      .required('Password is required'),
   }),
   handleSubmit: (values, { props, setStatus, setSubmitting }) => {
-    console.log('submit!', values);
-  }
-});
+    console.log('submit!', values)
+  },
+})
 
-const LoginForm = (props) => {
-  const { touched, errors, handleChange, handleBlur, handleSubmit, isSubmitting } = props;
+const LoginForm = props => {
+  const { touched, errors, handleChange, handleBlur, handleSubmit, isSubmitting } = props
 
   const getErrors = param => {
-    return errors[param] && touched[param] ? errors[param] : '';
-  };
+    return errors[param] && touched[param] ? errors[param] : ''
+  }
 
   return (
     <Form className="form" onSubmit={handleSubmit}>
@@ -71,7 +71,7 @@ const LoginForm = (props) => {
         }
       `}</style>
     </Form>
-  );
-};
+  )
+}
 
-export default formikEnhancer(LoginForm);
+export default formikEnhancer(LoginForm)

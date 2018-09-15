@@ -1,11 +1,11 @@
-import React from 'react';
-import Link from 'next/link';
-import { Button, Form } from 'reactstrap';
-import { withFormik } from 'formik';
+import React from 'react'
+import Link from 'next/link'
+import { Button, Form } from 'reactstrap'
+import { withFormik } from 'formik'
 
-import { auth, db } from '../firebase';
-import yup from '../lib/yup';
-import FormGroupBordered from './FormGroupBordered';
+import { auth, db } from '../firebase'
+import yup from '../lib/yup'
+import FormGroupBordered from './FormGroupBordered'
 
 const formikEnhancer = withFormik({
   validationSchema: yup.object().shape({
@@ -22,30 +22,30 @@ const formikEnhancer = withFormik({
     cpassword: yup
       .string()
       .sameAs(yup.ref('password'), 'Passwords do not match')
-      .required('Password confirmation is required')
+      .required('Password confirmation is required'),
   }),
   handleSubmit: (values, { props, setStatus, setSubmitting }) => {
-    const { email, password } = values;
+    const { email, password } = values
 
     auth
       .createUserWithEmailAndPassword(email, password)
       .then(authUser => db.registerUser(authUser.user.uid, email))
       .then(() => {
-        console.log('Success!');
+        console.log('Success!')
         // TODO: Redirect to account page
       })
       .catch(error => {
         console.log('error', error)
-      });
-  }
-});
+      })
+  },
+})
 
 const RegisterForm = props => {
-  const { touched, errors, handleChange, handleBlur, handleSubmit, isSubmitting } = props;
+  const { touched, errors, handleChange, handleBlur, handleSubmit, isSubmitting } = props
 
   const getErrors = param => {
-    return errors[param] && touched[param] ? errors[param] : '';
-  };
+    return errors[param] && touched[param] ? errors[param] : ''
+  }
 
   return (
     <Form className="form" onSubmit={handleSubmit}>
@@ -112,7 +112,7 @@ const RegisterForm = props => {
         }
       `}</style>
     </Form>
-  );
-};
+  )
+}
 
-export default formikEnhancer(RegisterForm);
+export default formikEnhancer(RegisterForm)

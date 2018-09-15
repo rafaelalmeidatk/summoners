@@ -1,15 +1,5 @@
-@font-face {
-    font-family: 'FrizQ';
-    src: url('../fonts/friz/FrizQuadrataTT.eot');
-    src: url('../fonts/friz/FrizQuadrataTT.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/friz/FrizQuadrataTT.woff') format('woff'),
-        url('../fonts/friz/FrizQuadrataTT.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 html, body {
-    background: #161e24;
-    color: #fff;
-    font-family: 'Montserrat', sans-serif;
+  background: #161e24;
+  color: #fff;
+  font-family: Roboto;
 }

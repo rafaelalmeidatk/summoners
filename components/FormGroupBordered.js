@@ -14,11 +14,12 @@ class FormGroupBordered extends React.Component {
   render() {
     return <FormGroup className="formGroup">
         <Label>{this.props.label}</Label>
-        <Input placeholder={this.props.placeholder} />
+        <Input type={this.props.type} placeholder={this.props.placeholder} />
         <style jsx global>
           {`
             .formGroup {
               border-left: ${this.state.borderActive ? "2px solid red" : "0"};
+              margin-bottom: 45px;
             }
             .formGroup label {
               color: #33434e;

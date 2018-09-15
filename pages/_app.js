@@ -1,11 +1,14 @@
-import App, { Container } from 'next/app'
 import React from 'react'
+import App, { Container } from 'next/app'
 import Head from 'next/head'
+import { Provider } from 'react-redux'
+
 import withAuthentication from '../components/withAuthentication'
+import withReduxStore from '../lib/with-redux-store'
 
 class MyApp extends App {
   render() {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, reduxStore } = this.props
 
     return (
       <Container>
@@ -16,10 +19,12 @@ class MyApp extends App {
             rel="stylesheet"
           />
         </Head>
-        <Component {...pageProps} />
+        <Provider store={reduxStore}>
+          <Component {...pageProps} />
+        </Provider>
       </Container>
     )
   }
 }
 
-export default withAuthentication(MyApp)
+export default withReduxStore(withAuthentication(MyApp))

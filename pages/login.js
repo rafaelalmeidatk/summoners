@@ -1,24 +1,14 @@
-import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import React from "react";
+import Layout_Login from "../components/Layout_Login";
 
 class LoginPage extends React.Component {
-    render() {
-        return(
-            <div>
-                <Container>
-                    <Row>
-                        <Col>.col</Col>
-                        <Col>.col</Col>
-                        <Col>.col</Col>
-                        <Col>.col</Col>
-                    </Row>
-                </Container>
-                <style jsx> {`
-                    
-                `}</style>
-            </div>
-        )
-    }
+  render() {
+    return(
+      <div>
+        <Layout_Login />
+      </div>
+    );
+  }
 }
 
 export default LoginPage;

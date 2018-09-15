@@ -1,12 +1,10 @@
-import AuthUserContext from '../components/AuthUserContext';
+import { Container, Row, Col } from "reactstrap";
+import Navbar from '../components/Navbar'
 
 export default () => (
-  <div>
-    <p>Let's go</p>
-    <p>
-      <AuthUserContext.Consumer>
-        {authUser => (authUser ? 'We have an user' : 'No user')}
-      </AuthUserContext.Consumer>
-    </p>
-  </div>
+  <Container fluid>
+    <Row>
+      <Navbar />
+    </Row>
+  </Container>
 );

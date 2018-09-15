@@ -1,14 +1,14 @@
 import React from 'react';
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col } from 'reactstrap';
 
-import Logo from "../components/Logo";
-import Title from "../components/Title";
-import RegisterForm from '../components/RegisterForm'
+import Logo from '../components/Logo';
+import Title from '../components/Title';
+import RegisterForm from '../components/RegisterForm';
 
 class RegisterPage extends React.Component {
   render() {
     return (
-      <Container fluid="true">
+      <Container fluid>
         <Row>
           <Col lg="4" className="login-wrapper">
             <Logo width="100px" margin="45px 0" />

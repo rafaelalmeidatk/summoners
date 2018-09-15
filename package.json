@@ -12,11 +12,13 @@
     "css-loader": "^1.0.0",
     "file-loader": "^2.0.0",
     "firebase": "^5.5.0",
+    "formik": "^1.3.0",
     "next": "^6.1.2",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "reactstrap": "^6.4.0",
     "style-loader": "^0.23.0",
-    "url-loader": "^1.1.1"
+    "url-loader": "^1.1.1",
+    "yup": "^0.26.5"
   }
 }

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Button, Form } from 'reactstrap';
 import { withFormik } from 'formik';
 
+import { auth, db } from '../firebase';
 import yup from '../lib/yup';
 import FormGroupBordered from './FormGroupBordered';
 
@@ -24,7 +25,18 @@ const formikEnhancer = withFormik({
       .required('Password confirmation is required')
   }),
   handleSubmit: (values, { props, setStatus, setSubmitting }) => {
-    console.log('submit!', values);
+    const { email, password } = values;
+
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(authUser => db.registerUser(authUser.user.uid, email))
+      .then(() => {
+        console.log('Success!');
+        // TODO: Redirect to account page
+      })
+      .catch(error => {
+        console.log('error', error)
+      });
   }
 });
 

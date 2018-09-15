@@ -1,0 +1,14 @@
+{
+  "name": "summoners",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^6.1.2",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1"
+  }
+}

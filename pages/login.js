@@ -1,11 +1,11 @@
-import React from 'react';
-import { Button } from 'reactstrap';
+import React from "react";
+import Layout_Login from "../components/Layout_Login";
 
 class LoginPage extends React.Component {
   render() {
-    return (
+    return(
       <div>
-        <Button color="primary">primary</Button> <style jsx> {``}</style>
+        <Layout_Login />
       </div>
     );
   }

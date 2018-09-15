@@ -1,4 +1,4 @@
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col } from 'reactstrap'
 import Navbar from '../components/Navbar'
 
 export default () => (
@@ -7,4 +7,4 @@ export default () => (
       <Navbar />
     </Row>
   </Container>
-);
+)

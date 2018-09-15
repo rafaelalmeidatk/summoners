@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "prettier": "prettier \"{components,firebase,pages,__{tests,mocks}__}/**/*.js\" --write"
   },
   "dependencies": {
     "@zeit/next-css": "^0.2.0",
@@ -18,5 +19,8 @@
     "reactstrap": "^6.4.0",
     "style-loader": "^0.23.0",
     "url-loader": "^1.1.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.14.2"
   }
 }

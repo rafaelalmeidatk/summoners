@@ -1,9 +1,9 @@
-import React from "react";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
-import FormGroupBordered from "./FormGroupBordered";
+import React from 'react'
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
+import FormGroupBordered from './FormGroupBordered'
 
 class LoginForm extends React.Component {
-  borderChange = () => this.FormGroupBordered.changeBorder();
+  borderChange = () => this.FormGroupBordered.changeBorder()
 
   render() {
     return (
@@ -29,7 +29,7 @@ class LoginForm extends React.Component {
         </Button>
         <Button outline color="secondary" size="lg" block>
           Dont have account? Register
-        </Button>        
+        </Button>
         <style jsx global>
           {`
             .form {
@@ -42,8 +42,8 @@ class LoginForm extends React.Component {
           `}
         </style>
       </Form>
-    );
+    )
   }
 }
 
-export default LoginForm;
+export default LoginForm

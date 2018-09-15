@@ -1,13 +1,14 @@
-import React from "react";
+import React from 'react'
 
 class LoginForm extends React.Component {
   render() {
-    return <div className="cta">
+    return (
+      <div className="cta">
         <h2>Find Summoners</h2>
         <h1>Build your Dream Team</h1>
         <p>
-          Use our database to look and find player for your duo, team or
-          just to make a few more friends.
+          Use our database to look and find player for your duo, team or just to make a few more
+          friends.
         </p>
         <style jsx>
           {`
@@ -20,11 +21,9 @@ class LoginForm extends React.Component {
               letter-spacing: 2px;
               text-transform: uppercase;
               margin-bottom: 15px;
-              font-family: montserrat;
               font-weight: normal;
             }
             .cta h1 {
-              font-family: FrizQ;
               color: #fff;
               font-size: 55px;
               text-transform: uppercase;
@@ -38,12 +37,13 @@ class LoginForm extends React.Component {
               letter-spacing: 2px;
               text-transform: uppercase;
               margin-bottom: 15px;
-              font-family: montserrat;
               font-weight: normal;
-            }`}
+            }
+          `}
         </style>
-      </div>;
+      </div>
+    )
   }
 }
 
-export default LoginForm;
+export default LoginForm

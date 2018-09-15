@@ -1,12 +1,13 @@
-import React from "react";
-import LoginForm from "./LoginForm";
-import Logo from "./Logo";
-import Title from "./Title";
-import { Container, Row, Col } from "reactstrap";
+import React from 'react'
+import LoginForm from './LoginForm'
+import Logo from './Logo'
+import Title from './Title'
+import { Container, Row, Col } from 'reactstrap'
 
 class Layout_Login extends React.Component {
   render() {
-    return <Container fluid="true">
+    return (
+      <Container fluid="true">
         <Row>
           <Col lg="4" className="login-wrapper">
             <Logo width="100px" margin="45px 0" />
@@ -27,16 +28,18 @@ class Layout_Login extends React.Component {
               justify-content: center;
             }
             .login-cta {
-              background: url("./static/img/bg_img/bg.jpg") no-repeat center center / cover;
+              background: url('./static/img/bg_img/bg.jpg') no-repeat center center / cover;
               min-height: 100vh;
               padding: 45px;
               display: flex;
               align-items: flex-end;
               justify-content: flex-end;
-            }`}
+            }
+          `}
         </style>
-      </Container>;
+      </Container>
+    )
   }
 }
 
-export default Layout_Login;
+export default Layout_Login

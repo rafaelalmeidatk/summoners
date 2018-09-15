@@ -1,9 +1,9 @@
-import React from 'react';
-import { FormGroup, Label, Input } from 'reactstrap';
+import React from 'react'
+import { FormGroup, Label, Input } from 'reactstrap'
 
 class FormGroupBordered extends React.Component {
   render() {
-    const { label, ...props } = this.props;
+    const { label, ...props } = this.props
 
     return (
       <FormGroup className="form-group">
@@ -11,7 +11,8 @@ class FormGroupBordered extends React.Component {
         <Input {...props} className="input" />
 
         <style jsx global>{`
-          .form-control, .form-control:focus {
+          .form-control,
+          .form-control:focus {
             color: #fff !important;
             background-color: transparent;
             border-width: none;
@@ -44,8 +45,8 @@ class FormGroupBordered extends React.Component {
           }
         `}</style>
       </FormGroup>
-    );
+    )
   }
 }
 
-export default FormGroupBordered;
+export default FormGroupBordered

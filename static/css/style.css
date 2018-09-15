@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Friz';
+    src: url('./static/fonts/friz/FrizQuadrataTT.eot');
+    src: url('./static/fonts/friz/FrizQuadrataTT.eot?#iefix') format('embedded-opentype'),
+        url('./static/fonts/friz/FrizQuadrataTT.woff') format('woff'),
+        url('./static/fonts/friz/FrizQuadrataTT.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+    background: #161e24;
+    font-family: 'Montserrat', sans-serif;
+}

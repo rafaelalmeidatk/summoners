@@ -5,7 +5,7 @@ import withAuthorization from '../lib/withAuthorization'
 import Navbar from '../components/Navbar'
 import LoLAccountIntegration from '../components/LoLAccountIntegration'
 
-const AccountPage = () => (
+const AccountPage = props => (
   <div className="container-wrapper">
     <Container className="container">
       <Navbar />

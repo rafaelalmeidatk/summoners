@@ -1,18 +1,26 @@
 import React from 'react'
 import { Container, Row, Col } from 'reactstrap'
+import { connect } from 'react-redux'
+import Router from 'next/router'
 
+import { loginUser } from '../ducks/session'
 import Logo from '../components/Logo'
 import Title from '../components/Title'
 import LoginForm from '../components/LoginForm'
 
 class LoginPage extends React.Component {
+  handleLoginSuccess = user => {
+    this.props.loginUser(user)
+    Router.push('/')
+  }
+
   render() {
     return (
       <Container fluid>
         <Row>
           <Col lg="4" className="login-wrapper">
             <Logo width="100px" margin="45px 0" />
-            <LoginForm />
+            <LoginForm onLoginSuccess={this.handleLoginSuccess} />
           </Col>
           <Col lg="8" className="login-cta">
             <Title align="right" />
@@ -41,4 +49,9 @@ class LoginPage extends React.Component {
   }
 }
 
-export default LoginPage
+const mapDispatchToProps = { loginUser }
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(LoginPage)

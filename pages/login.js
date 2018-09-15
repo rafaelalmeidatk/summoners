@@ -1,16 +1,13 @@
 import React from 'react';
-import { Row, Col} from 'antd';
+import { Button } from 'reactstrap';
 
 class LoginPage extends React.Component {
     render() {
         return(
             <div>
-                <h1>testando aaa</h1>
-                <h2>testando bbb</h2>
+                <Button color="primary">primary</Button>{' '}
                 <style jsx> {`
-                    h2{
-                        font-family: 'friz';
-                    }
+                    
                 `}</style>
             </div>
         )

@@ -137,6 +137,52 @@ module.exports = () => {
             pageData.mostPlayed = mostPlayed
           }),
       )
+      .then(() =>
+        riotApi
+          .get(endpoint(region, 'match/v3/matchlists/by-account/' + accountId))
+          .then(async apiRes => {
+            const { data } = apiRes
+
+            const matches = []
+            for (let i = 0; i < 5; i++) {
+              const match = data.matches[i]
+              if (!match) continue
+
+              const matchData = (await riotApi.get(
+                endpoint(region, 'match/v3/matches/' + match.gameId),
+              )).data
+
+              const { participantId } = matchData.participantIdentities.find(
+                identity => identity.player.accountId === accountId,
+              )
+
+              const participant = matchData.participants.find(
+                participant => participant.participantId === participantId,
+              )
+
+              const { stats } = participant
+
+              matches.push({
+                gameDuration: matchData.gameDuration,
+                spell1Id: participant.spell1Id,
+                spell2Id: participant.spell2Id,
+                win: stats.win,
+                item0: stats.item0,
+                item1: stats.item1,
+                item2: stats.item2,
+                item3: stats.item3,
+                item4: stats.item4,
+                item5: stats.item5,
+                item6: stats.item6,
+                kills: stats.kills,
+                deaths: stats.deaths,
+                assists: stats.assists,
+              })
+            }
+
+            pageData.matches = matches
+          }),
+      )
       .then(() => res.send(pageData))
 
       .catch(err => genericErrorHandler(res, err))

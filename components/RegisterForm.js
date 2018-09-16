@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Router from 'next/router'
 import { Button, Form } from 'reactstrap'
 import { withFormik } from 'formik'
 
@@ -31,8 +32,7 @@ const formikEnhancer = withFormik({
       .createUserWithEmailAndPassword(email, password)
       .then(authUser => db.registerUser(authUser.user.uid, email))
       .then(() => {
-        console.log('Success!')
-        // TODO: Redirect to account page
+        Router.push('/account');
       })
       .catch(error => {
         console.log('error', error)

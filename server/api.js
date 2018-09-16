@@ -134,6 +134,7 @@ module.exports = () => {
               mostPlayedBlacklist.push(champion)
             }
 
+            pageData.lastPlayed = data.matches[0] && data.matches[0].champion
             pageData.mostPlayed = mostPlayed
           }),
       )

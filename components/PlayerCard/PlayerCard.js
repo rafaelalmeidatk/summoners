@@ -40,7 +40,7 @@ const PlayerCard = ({ player, className }) => {
             <span className="header">
               <div className="lookinFor">{lookingFor || 'Not Specified'}</div>
             </span>
-            <span className="region">NA1</span>
+            {region && <span className="region">{region.toUpperCase()}</span>}
             <span
               className="avatar"
               style={{

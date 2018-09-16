@@ -29,14 +29,12 @@ class SummonerPage extends React.Component {
 
   componentDidMount() {
     const { baseUrl, region, summonerName } = this.props
-    return
+    // return
     RiotApi.getSummonerPageData(baseUrl, region, summonerName).then(res => {
       console.log('Data returned', res.data)
       this.setState({ loading: false, data: res.data })
     })
   }
-
-
 
   render() {
     const { region, summonerName } = this.props
@@ -48,14 +46,9 @@ class SummonerPage extends React.Component {
 
     return (
       <Layout>
-        <div className="page">
-          <div className="hero" />
-          <div className="hero-inner">
-            <div className="container py-5">
-              {!data && <RetrievingSummonerData />}
-              {data && <h3>Done!</h3>}
-            </div>
-          </div>
+        <div className="container py-5">
+          {!data && <RetrievingSummonerData />}
+          {data && <h3>Done!</h3>}
         </div>
 
         <style jsx>{`

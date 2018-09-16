@@ -23,10 +23,7 @@ const formikEnhancer = withFormik({
 
     auth
       .login(email, password)
-      .then(user => {
-        console.log('gotcha!', user)
-        props && props.onLoginSuccess(user)
-      })
+      .then(user => props && props.onLoginSuccess(user))
       .catch(error => {
         console.log('error', error)
         setSubmitting(false)

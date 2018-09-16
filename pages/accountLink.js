@@ -1,18 +1,52 @@
-import { Container, Row, Col, Button, FormGroup, Label, Input } from 'reactstrap'
+import React from 'react'
+import Router from 'next/router'
+import { Alert, Button } from 'reactstrap'
 
+import withAuthorization from '../lib/withAuthorization'
 import Layout from '../components/Layout'
 import { height as toolbarHeight } from '../components/Toolbar/Toolbar'
-import RiotApi, { regionNamesByCode } from '../lib/riotApi'
+import SummonerSearchForm from '../components/SummonerSearchForm'
+import { db } from '../firebase'
+import RiotApi from '../lib/riotApi'
 
-export default class extends React.Component {
-  constructor(props) {
-    super(props)
+class AccountLinkPage extends React.Component {
+  state = {
+    summonerData: {
+      accountId: 200713582,
+      id: 2489808,
+      name: 'Konoke Tk',
+      profileIconId: 983,
+      revisionDate: 1527016193000,
+      summonerLevel: 45,
+    },
+    integrationCode: null,
+    verifying: false,
+    errorMessage: null,
   }
 
-  handleSearch = () => {
-    const region = this.regionInput.value;
-    const summonerName = this.summonerNameInput.value;
-    RiotApi.findSummonerByName(region, summonerName);
+  handleSummonerData = summonerData => {
+    const { user } = this.props
+    db.getUserData(user.uid).then(data => {
+      this.setState({ summonerData, integrationCode: data.integrationCode })
+    })
+  }
+
+  handleVerify = () => {
+    this.setState({ verifying: true })
+    const { user } = this.props
+    const { integrationCode, summonerData } = this.state
+
+    RiotApi.verifyIntegrationCode(integrationCode, summonerData.id)
+      .then(() => {
+        console.log('Link successful')
+        return db.linkSummonerWithUser(user.uid, summonerData).then(() => {
+          Router.push('/account')
+        })
+      })
+      .catch(() => {
+        this.setState({ errorMessage: 'Something went wrong, check the code and try again.' })
+        this.setState({ verifying: false })
+      })
   }
 
   render() {
@@ -23,35 +57,25 @@ export default class extends React.Component {
             <div className="container py-5">
               <h1>Account linking</h1>
 
-              <FormGroup>
-                <Label for="region">Select your region</Label>
-                <Input
-                  type="select"
-                  name="region"
-                  id="region"
-                  innerRef={node => (this.regionInput = node)}
-                >
-                  {Object.keys(regionNamesByCode).map(key => (
-                    <option key={key} value={key}>
-                      {regionNamesByCode[key]}
-                    </option>
-                  ))}
-                </Input>
-              </FormGroup>
+              <SummonerSearchForm onSummonerData={this.handleSummonerData} />
 
-              <FormGroup>
-                <Label for="summonerName">Type your summoner name</Label>
-                <Input
-                  type="text"
-                  name="summonerName"
-                  id="summonerName"
-                  innerRef={node => (this.summonerNameInput = node)}
-                />
-              </FormGroup>
+              {this.state.summonerData && (
+                <div className="integration-code-container">
+                  <h2>Insert the following code on your LoL client</h2>
+                  <div className="integration-code">3210312932</div>
+                  <Button
+                    color="primary"
+                    onClick={this.handleVerify}
+                    disabled={this.state.verifying}
+                  >
+                    Verify
+                  </Button>
 
-              <Button color="primary" onClick={this.handleSearch}>
-                Search
-              </Button>
+                  {this.state.errorMessage && (
+                    <Alert color="danger">{this.state.errorMessage}</Alert>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -69,8 +93,18 @@ export default class extends React.Component {
             padding-top: ${toolbarHeight};
             min-height: 500px;
           }
+
+          .integration-code-container {
+            margin-top: 3rem;
+          }
+          .integration-code {
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+          }
         `}</style>
       </Layout>
     )
   }
 }
+
+export default withAuthorization(AccountLinkPage)

@@ -101,6 +101,42 @@ module.exports = () => {
             pageData.losses = league.losses
           }),
       )
+      .then(() =>
+        riotApi
+          .get(endpoint(region, 'match/v3/matchlists/by-account/' + accountId))
+          .then(apiRes => {
+            const { data } = apiRes
+            const championsPlayed = {}
+            for (let i = 0, len = data.matches.length; i < len; i++) {
+              const champion = data.matches[i].champion
+              if (!championsPlayed[champion]) {
+                championsPlayed[champion] = 1
+              } else {
+                championsPlayed[champion]++
+              }
+            }
+
+            const mostPlayed = []
+            const mostPlayedBlacklist = []
+            for (let i = 0; i < 3; i++) {
+              let largest = -1
+              let champion = null
+              const champions = Object.keys(championsPlayed)
+              for (let j = 0; j < champions.length; j++) {
+                if (mostPlayedBlacklist.indexOf(champions[j]) >= 0) continue
+                const val = championsPlayed[champions[j]]
+                if (val > largest) {
+                  largest = val
+                  champion = champions[j]
+                }
+              }
+              mostPlayed[i] = champion
+              mostPlayedBlacklist.push(champion)
+            }
+
+            pageData.mostPlayed = mostPlayed
+          }),
+      )
       .then(() => res.send(pageData))
 
       .catch(err => genericErrorHandler(res, err))

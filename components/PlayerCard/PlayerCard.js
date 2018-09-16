@@ -28,12 +28,7 @@ const PlayerCard = ({ player, className }) => {
   const rankedName = isRanked && getRankedName(rank, tier)
 
   return (
-    <Link
-      href={{
-        pathname: `/summoner/${region}/${player.displayName}`,
-        query: { region, summonerName: player.displayName },
-      }}
-    >
+    <Link href={{ pathname: `/summoner/${region}/${player.displayName}` }}>
       <div className={`playerCardWrapper${className ? ` ${className}` : ''}`}>
         <div
           className="playerCard"

@@ -39,13 +39,13 @@ class SummonerPage extends React.Component {
 
   componentDidMount() {
     const { baseUrl, region, summonerName } = this.props
-    this.setState({
-      loading: false,
-      data: JSON.parse(
-        '{"summonerName":"Konoke Tk","summonerLevel":45,"profileIconId":983,"tier":"BRONZE","rank":"I","wins":4,"losses":8,"lastPlayed":141,"mostPlayed":[{"championId":"141","masteryLevel":5},{"championId":"51","masteryLevel":3},{"championId":"64","masteryLevel":7}],"matches":[{"id":1384684365,"championId":141,"gameDuration":2268,"spell1Id":11,"spell2Id":4,"win":true,"item0":1400,"item1":3211,"item2":3071,"item3":3111,"item4":3053,"item5":0,"item6":3340,"kills":4,"deaths":10,"assists":14},{"id":1384660285,"championId":11,"gameDuration":2046,"spell1Id":11,"spell2Id":4,"win":true,"item0":1419,"item1":3006,"item2":3031,"item3":3087,"item4":1042,"item5":0,"item6":3363,"kills":7,"deaths":13,"assists":14},{"id":1384609167,"championId":64,"gameDuration":1471,"spell1Id":11,"spell2Id":4,"win":true,"item0":1412,"item1":2031,"item2":3117,"item3":3071,"item4":3742,"item5":0,"item6":3340,"kills":9,"deaths":6,"assists":9},{"id":1384121359,"championId":67,"gameDuration":1467,"spell1Id":7,"spell2Id":4,"win":false,"item0":1055,"item1":3006,"item2":3031,"item3":3086,"item4":0,"item5":0,"item6":3340,"kills":2,"deaths":8,"assists":6},{"id":1384107937,"championId":67,"gameDuration":921,"spell1Id":7,"spell2Id":4,"win":true,"item0":1055,"item1":3031,"item2":3006,"item3":3094,"item4":0,"item5":0,"item6":3340,"kills":11,"deaths":1,"assists":2}]}',
-      ),
-    })
-    return
+    // this.setState({
+    //   loading: false,
+    //   data: JSON.parse(
+    //     '{"summonerName":"Konoke Tk","summonerLevel":45,"profileIconId":983,"tier":"BRONZE","rank":"I","wins":4,"losses":8,"lastPlayed":141,"mostPlayed":[{"championId":"141","masteryLevel":5},{"championId":"51","masteryLevel":3},{"championId":"64","masteryLevel":7}],"matches":[{"id":1384684365,"championId":141,"gameDuration":2268,"spell1Id":11,"spell2Id":4,"win":true,"item0":1400,"item1":3211,"item2":3071,"item3":3111,"item4":3053,"item5":0,"item6":3340,"kills":4,"deaths":10,"assists":14},{"id":1384660285,"championId":11,"gameDuration":2046,"spell1Id":11,"spell2Id":4,"win":true,"item0":1419,"item1":3006,"item2":3031,"item3":3087,"item4":1042,"item5":0,"item6":3363,"kills":7,"deaths":13,"assists":14},{"id":1384609167,"championId":64,"gameDuration":1471,"spell1Id":11,"spell2Id":4,"win":true,"item0":1412,"item1":2031,"item2":3117,"item3":3071,"item4":3742,"item5":0,"item6":3340,"kills":9,"deaths":6,"assists":9},{"id":1384121359,"championId":67,"gameDuration":1467,"spell1Id":7,"spell2Id":4,"win":false,"item0":1055,"item1":3006,"item2":3031,"item3":3086,"item4":0,"item5":0,"item6":3340,"kills":2,"deaths":8,"assists":6},{"id":1384107937,"championId":67,"gameDuration":921,"spell1Id":7,"spell2Id":4,"win":true,"item0":1055,"item1":3031,"item2":3006,"item3":3094,"item4":0,"item5":0,"item6":3340,"kills":11,"deaths":1,"assists":2}]}',
+    //   ),
+    // })
+    // return
     RiotApi.getSummonerPageData(baseUrl, region, summonerName).then(res => {
       console.log('Data returned', res.data)
       this.setState({ loading: false, data: res.data })

@@ -11,6 +11,14 @@ export const registerUser = (id, email) => {
   })
 }
 
+export const getAllUsers = () =>
+  new Promise(resolve =>
+    db
+      .ref(`users`)
+      .once('value')
+      .then(snapshot => resolve(snapshot.val())),
+  )
+
 export const getUserData = id => {
   return new Promise(resolve => {
     db.ref(`users/${id}`)

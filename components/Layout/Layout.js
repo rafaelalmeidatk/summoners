@@ -17,7 +17,7 @@ const Layout = ({ className, children }) => (
 
       .hero {
         background-image: linear-gradient(0deg, #051820, rgba(5, 24, 32, 0.7)),
-          url('http://www.lol-wallpapers.com/wp-content/uploads/2017/01/Snowdown-Background-League-of-Legends-Artwork-Wallpaper-lol.jpg');
+          url('https://www.lol-wallpapers.com/wp-content/uploads/2017/01/Snowdown-Background-League-of-Legends-Artwork-Wallpaper-lol.jpg');
         background-size: cover;
         height: ${heroHeight};
       }

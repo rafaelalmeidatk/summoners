@@ -50,7 +50,7 @@ module.exports = () => {
   router.get('/link-data/:region/:summonerId', (req, res) => {
     const { region, summonerId } = req.params
     if (!region || !summonerId) return res.sendStatus(400)
-    
+
     let accountId = null
     const linkData = {}
 
@@ -200,6 +200,26 @@ module.exports = () => {
             }
 
             pageData.matches = matches
+          }),
+      )
+      .then(() =>
+        riotApi
+          .get(endpoint(region, 'champion-mastery/v3/champion-masteries/by-summoner/' + summonerId))
+          .then(async apiRes => {
+            const { data } = apiRes
+            if (!data) return
+
+            for (let i = 0; i < data.length; i++) {
+              if (!data[i]) continue
+              const mastery = data[i]
+              const index = pageData.mostPlayed.indexOf(mastery.championId + '')
+              if (index >= 0) {
+                pageData.mostPlayed[index] = {
+                  championId: pageData.mostPlayed[index],
+                  masteryLevel: mastery.championLevel,
+                }
+              }
+            }
           }),
       )
       .then(() => res.send(pageData))

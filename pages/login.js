@@ -19,7 +19,7 @@ class LoginPage extends React.Component {
       <Container fluid>
         <Row>
           <Col lg="4" className="login-wrapper">
-            <Logo width="100px" margin="45px 0" />
+            <Logo />
             <LoginForm onLoginSuccess={this.handleLoginSuccess} />
           </Col>
           <Col lg="8" className="login-cta">

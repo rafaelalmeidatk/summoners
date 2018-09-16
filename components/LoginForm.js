@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { Button, Form } from 'reactstrap'
 import { withFormik } from 'formik'
 
@@ -66,17 +67,32 @@ const LoginForm = props => {
         Login
       </Button>
 
-      <Button outline color="secondary" size="lg" block>
-        Dont have account? Register
-      </Button>
+      <p className="register-text">
+        Don't have an account? 
+        <Link href="/register">
+          <a className="register-link">Register</a>
+        </Link>
+      </p>
 
       <style jsx global>{`
         .form {
           width: 100%;
         }
         .btn-login {
-          background: #a65fc5;
+          background: #0f2e43;
+          border: 0;
           margin-top: 25px;
+        }
+        .register-text {
+          margin-top: 20px;
+          text-align: center;
+        }
+        .register-text a {
+          color: white;
+          font-weight: bold;
+        }
+        .register-link {
+          margin-left: 6px;
         }
       `}</style>
     </Form>

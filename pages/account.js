@@ -24,6 +24,7 @@ const AccountPage = ({ user }) => (
               <option>MID</option>
               <option>BOT</option>
               <option>ADC</option>
+              <option>JG</option>
               <option>SUP</option>
             </UserDatabaseFieldSelectInput>
 
@@ -33,6 +34,7 @@ const AccountPage = ({ user }) => (
               <option>MID</option>
               <option>BOT</option>
               <option>ADC</option>
+              <option>JG</option>
               <option>SUP</option>
             </UserDatabaseFieldSelectInput>
 

@@ -90,7 +90,12 @@ export default class extends React.Component {
 
           <SummonersFilter onFilterChange={this.handleFilterChange} />
 
-          {this.state.loading && <h4 className="loading">Loading all summoners...</h4>}
+          {this.state.loading && (
+            <div className="loading">
+              <h4 >Loading all summoners...</h4>
+              <img src="https://vignette.wikia.nocookie.net/leagueoflegends/images/3/31/LoL_Facebook_Icon_17.gif/revision/latest?cb=20161029213918" />
+            </div>
+          )}
           <div className="row summoners-row">
             {this.state.users.map(player => (
               <div key={player.uuid} className="col-6 col-md-3 mb-4">
@@ -98,6 +103,11 @@ export default class extends React.Component {
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="disclaimer">
+          <p>Disclaimer: most of this data is placeholder and is here for demonstration purposes</p>
+          <p>All trademarks and copyrights on this site are property of their respective owners</p>
         </div>
 
         <style jsx>{`
@@ -116,12 +126,18 @@ export default class extends React.Component {
           }
 
           .loading {
-            margin-top: 3rem;
+            margin: 3rem 0;
             text-align: center;
           }
 
           .summoners-row {
             margin-top: 3rem;
+          }
+
+          .disclaimer {
+            padding: 2rem 1rem 1rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            text-align: center;
           }
         `}</style>
       </Layout>

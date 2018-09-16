@@ -28,7 +28,7 @@ class LoginPage extends React.Component {
         </Row>
         <style jsx global>{`
           .login-wrapper {
-            min-height: 100vh;
+            min-height: calc(100vh - 50px);
             padding: 35px;
             display: flex;
             flex-direction: column;
@@ -37,7 +37,7 @@ class LoginPage extends React.Component {
           }
           .login-cta {
             background: url('./static/img/bg_img/bg.jpg') no-repeat center center / cover;
-            min-height: 100vh;
+            min-height: calc(100vh - 50px);
             padding: 45px;
             display: flex;
             align-items: flex-end;

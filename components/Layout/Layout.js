@@ -24,7 +24,7 @@ const Layout = ({ className, children }) => (
 
       .hero-inner {
         width: 100%;
-        min-height: 100vh;
+        min-height: calc(100vh - 50px);
         padding-top: ${toolbarHeight};
         margin-top: -${heroHeight};
       }

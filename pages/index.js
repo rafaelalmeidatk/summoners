@@ -1,7 +1,6 @@
 import Layout from '../components/Layout'
 import PlayerCard from '../components/PlayerCard'
 import SummonersFilter from '../components/SummonersFilter'
-import { height as toolbarHeight } from '../components/Toolbar/Toolbar'
 import { db } from '../firebase'
 
 // Let's leave this here just so you guys know the format of data
@@ -19,7 +18,6 @@ const players = [
     region: 'BR1',
   },
 ]
-const heroHeight = '400px'
 
 export default class extends React.Component {
   state = {
@@ -92,7 +90,7 @@ export default class extends React.Component {
 
           <SummonersFilter onFilterChange={this.handleFilterChange} />
 
-          {this.state.loading && <h4>Loading...</h4>}
+          {this.state.loading && <h4 className="loading">Loading all summoners...</h4>}
           <div className="row summoners-row">
             {this.state.users.map(player => (
               <div key={player.uuid} className="col-6 col-md-3 mb-4">
@@ -115,6 +113,11 @@ export default class extends React.Component {
 
           .presentation h2 {
             font-size: 3em;
+          }
+
+          .loading {
+            margin-top: 3rem;
+            text-align: center;
           }
 
           .summoners-row {

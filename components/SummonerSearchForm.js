@@ -20,11 +20,16 @@ const formikEnhancer = withFormik({
       .then(res => {
         const { data } = res
         props.onSummonerData(regionCode, data)
+        setSubmitting(false)
       })
       .catch(error => {
-        console.log('error!', error)
-        // TODO: handle it
         setSubmitting(false)
+        if (error.response.status === 404) {
+          return props.onError(
+            'We could not find this summoner. Check if the region is correct and try again',
+          )
+        }
+        props.onError('Ops, something went wrong, try again later.')
       })
   },
 })

@@ -29,7 +29,7 @@ class AccountLinkPage extends React.Component {
     this.setState({ verifying: true })
     const { user } = this.props
     const { region, summonerData, integrationCode } = this.state
-    
+
     // First verify the integration code
     RiotApi.verifyIntegrationCode(region, integrationCode, summonerData.id)
       .then(() => RiotApi.getSummonerLinkData(region, summonerData.id))

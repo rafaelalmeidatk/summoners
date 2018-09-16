@@ -31,7 +31,7 @@ const PlayerCard = ({ player, className }) => {
           />
           <h2 className="name">{player.displayName}</h2>
           <div className="roles">{rolesText || 'Not Specified'}</div>
-          <h4 className="rankName">{rankedName}</h4>
+          <h4 className="rankName">{rankedName || 'UNRANKED'}</h4>
           <img src={getTierIcon(tier, rank)} alt={rankedName} className="rankImage" />
         </div>
       </div>

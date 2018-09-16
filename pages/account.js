@@ -1,57 +1,51 @@
 import React from 'react'
-import { Container } from 'reactstrap'
-
 import withAuthorization from '../lib/withAuthorization'
-import Navbar from '../components/Navbar'
+import Layout from '../components/Layout'
 import LoLAccountIntegration from '../components/LoLAccountIntegration'
 import UserDatabaseFieldSelectInput from '../components/UserDatabaseFieldSelectInput'
 
 const AccountPage = ({ user }) => (
-  <div className="container-wrapper">
-    <Container className="container">
-      <Navbar />
-      <div className="content">
-        <h1>My account</h1>
+  <Layout>
+    <div className="container py-5">
+      <h1>My account</h1>
 
-        <h2>Email</h2>
-        <p>dasdas@dasdsa.com</p>
+      <h2>Email</h2>
+      <p>dasdas@dasdsa.com</p>
 
-        {user && (
-          <>
-            <h2>Primary role</h2>
-            <UserDatabaseFieldSelectInput userId={user.uid} fieldName="primaryRole">
-              <option>TOP</option>
-              <option>MID</option>
-              <option>BOT</option>
-              <option>ADC</option>
-              <option>JG</option>
-              <option>SUP</option>
-            </UserDatabaseFieldSelectInput>
+      {user && (
+        <>
+          <h2>Primary role</h2>
+          <UserDatabaseFieldSelectInput userId={user.uid} fieldName="primaryRole">
+            <option>TOP</option>
+            <option>MID</option>
+            <option>BOT</option>
+            <option>ADC</option>
+            <option>JG</option>
+            <option>SUP</option>
+          </UserDatabaseFieldSelectInput>
 
-            <h2>Secondary role</h2>
-            <UserDatabaseFieldSelectInput userId={user.uid} fieldName="secondaryRole">
-              <option>TOP</option>
-              <option>MID</option>
-              <option>BOT</option>
-              <option>ADC</option>
-              <option>JG</option>
-              <option>SUP</option>
-            </UserDatabaseFieldSelectInput>
+          <h2>Secondary role</h2>
+          <UserDatabaseFieldSelectInput userId={user.uid} fieldName="secondaryRole">
+            <option>TOP</option>
+            <option>MID</option>
+            <option>BOT</option>
+            <option>ADC</option>
+            <option>JG</option>
+            <option>SUP</option>
+          </UserDatabaseFieldSelectInput>
 
-            <h2>Looking for a</h2>
-            <UserDatabaseFieldSelectInput userId={user.uid} fieldName="lookingFor">
-              <option>Duo</option>
-              <option>3v3 Team</option>
-              <option>5v5 Team</option>
-            </UserDatabaseFieldSelectInput>
-          </>
-        )}
+          <h2>Looking for a</h2>
+          <UserDatabaseFieldSelectInput userId={user.uid} fieldName="lookingFor">
+            <option>Duo</option>
+            <option>3v3 Team</option>
+            <option>5v5 Team</option>
+          </UserDatabaseFieldSelectInput>
+        </>
+      )}
 
-        <h2>LoL account</h2>
-        <LoLAccountIntegration />
-      </div>
-    </Container>
-
+      <h2>LoL account</h2>
+      <LoLAccountIntegration />
+    </div>
     <style jsx>{`
       .container-wrapper {
         background: url('./static/img/freljord.jpg') no-repeat center center / cover;
@@ -65,7 +59,7 @@ const AccountPage = ({ user }) => (
         margin-top: 24px;
       }
     `}</style>
-  </div>
+  </Layout>
 )
 
 export default withAuthorization(AccountPage)

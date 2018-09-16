@@ -40,6 +40,7 @@ const PlayerCard = ({ player, className }) => {
             <span className="header">
               <div className="lookinFor">{lookingFor || 'Not Specified'}</div>
             </span>
+            <span className="region">NA1</span>
             <span
               className="avatar"
               style={{
@@ -74,9 +75,20 @@ const PlayerCard = ({ player, className }) => {
           }
 
           .inner {
+            position: relative;
             background: linear-gradient(0deg, rgba(5, 24, 32, 0.8), rgba(5, 24, 32, 0.4));
             height: 100%;
             padding: 15px 15px 70px;
+          }
+
+          .region {
+            padding: 3px 8px;
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            font-weight: bold;
+            border-radius: 7px;
+            background: rgba(0, 0, 0, 0.4);
           }
 
           .name {

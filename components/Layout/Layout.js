@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Toolbar, { toolbarHeight } from '../Toolbar'
 
-const heroHeight = '400px'
+const heroHeight = '600px'
 const Layout = ({ className, children }) => (
   <div className={className}>
     <Toolbar />

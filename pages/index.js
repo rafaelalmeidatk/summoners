@@ -68,7 +68,13 @@ export default class extends React.Component {
     return (
       <Layout>
         <div className="container py-5">
-          <h1 className="mb-4">Find a duo</h1>
+          <div className="presentation">
+            <h2>Looking for someone to play with?</h2>
+            <h3>Meet your next duo or team mates!</h3>
+
+            <p>Bellow you can see all the summoners that are looking for company, use the filter and add someone on the game</p>
+          </div>
+
           {this.state.loading && <h4>Loading...</h4>}
           <div className="row">
             {this.state.users.map(player => (
@@ -78,6 +84,23 @@ export default class extends React.Component {
             ))}
           </div>
         </div>
+
+        <style jsx>{`
+          .presentation {
+            text-align: center;
+            margin-bottom: 2rem;
+          }
+          
+          .presentation h3 {
+            padding: 0 12px 7px;
+            display: inline-block;
+          }
+
+          .presentation h2 {
+            font-size: 3em;
+            
+          }
+        `}</style>
       </Layout>
     )
   }

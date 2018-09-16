@@ -18,24 +18,31 @@ class SummonerPage extends React.Component {
 
   state = {
     loading: true,
+    data: null,
   }
 
   componentDidMount() {
     const { baseUrl, region, summonerName } = this.props
     RiotApi.getSummonerPageData(baseUrl, region, summonerName).then(res => {
-      console.log('the data', res.data)
+      console.log('Data returned', res.data)
+      this.setState({ loading: false, data: res.data })
     })
   }
 
   render() {
-    const { region, summonerName, data, baseUrl } = this.props
+    const { region, summonerName } = this.props
     if (!region || !summonerName) {
       return <Error statusCode={404} />
     }
 
-    console.log('the dsadsa', data, baseUrl)
+    const { data } = this.state
 
-    return <Container>hi</Container>
+    return (
+      <Container>
+        {!data && <h3>Hey, wait a minute, we are gathering all the data for you!</h3>}
+        {data && <h3>Done!</h3>}
+      </Container>
+    )
   }
 }
 

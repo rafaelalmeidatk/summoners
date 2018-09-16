@@ -1,5 +1,6 @@
 import Layout from '../components/Layout'
 import PlayerCard from '../components/PlayerCard'
+import SummonersFilter from '../components/SummonersFilter'
 import { height as toolbarHeight } from '../components/Toolbar/Toolbar'
 import { db } from '../firebase'
 
@@ -33,7 +34,7 @@ export default class extends React.Component {
       .map(u => this.convertUserDataToPlayerCardData(u))
       .filter(user => user.displayName)
 
-    this.setState({ users: stateUsers, loading: false })
+    this.setState({ users: stateUsers, allUsers: stateUsers, loading: false })
   }
 
   usersObjectToArray = objectList => {
@@ -64,6 +65,17 @@ export default class extends React.Component {
     return linkData.rankedData[0]
   }
 
+  handleFilterChange = newFilter => {
+    const filteredUsers = this.state.allUsers.filter(user => {
+      const { tier, lookingFor } = user
+      if (!tier || !lookingFor) return false
+      return (
+        newFilter.tiers[tier.toLowerCase()] && newFilter.lookingForOpts[lookingFor.toLowerCase()]
+      )
+    })
+    this.setState({ users: filteredUsers })
+  }
+
   render() {
     return (
       <Layout>
@@ -72,11 +84,16 @@ export default class extends React.Component {
             <h2>Looking for someone to play with?</h2>
             <h3>Meet your next duo or team mates!</h3>
 
-            <p>Bellow you can see all the summoners that are looking for company, use the filter and add someone on the game</p>
+            <p>
+              Bellow you can see all the summoners that are looking for company, use the filter and
+              add someone on the game to play together
+            </p>
           </div>
 
+          <SummonersFilter onFilterChange={this.handleFilterChange} />
+
           {this.state.loading && <h4>Loading...</h4>}
-          <div className="row">
+          <div className="row summoners-row">
             {this.state.users.map(player => (
               <div key={player.uuid} className="col-6 col-md-3 mb-4">
                 <PlayerCard player={player} />
@@ -90,7 +107,7 @@ export default class extends React.Component {
             text-align: center;
             margin-bottom: 2rem;
           }
-          
+
           .presentation h3 {
             padding: 0 12px 7px;
             display: inline-block;
@@ -98,7 +115,10 @@ export default class extends React.Component {
 
           .presentation h2 {
             font-size: 3em;
-            
+          }
+
+          .summoners-row {
+            margin-top: 3rem;
           }
         `}</style>
       </Layout>

@@ -68,7 +68,7 @@ const LoginForm = props => {
       </Button>
 
       <p className="register-text">
-        Don't have an account? 
+        Don't have an account?
         <Link href="/register">
           <a className="register-link">Register</a>
         </Link>

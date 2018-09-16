@@ -21,7 +21,10 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
 
-          <script src="https://www.reactriot.com/entries/220-batatas-da-terra/vote.js" type="text/javascript"></script> 
+          <script
+            src="https://www.reactriot.com/entries/220-batatas-da-terra/vote.js"
+            type="text/javascript"
+          />
         </body>
       </html>
     )

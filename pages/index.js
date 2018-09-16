@@ -92,7 +92,7 @@ export default class extends React.Component {
 
           {this.state.loading && (
             <div className="loading">
-              <h4 >Loading all summoners...</h4>
+              <h4>Loading all summoners...</h4>
               <img src="https://vignette.wikia.nocookie.net/leagueoflegends/images/3/31/LoL_Facebook_Icon_17.gif/revision/latest?cb=20161029213918" />
             </div>
           )}

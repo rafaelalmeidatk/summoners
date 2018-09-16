@@ -32,7 +32,7 @@ const formikEnhancer = withFormik({
       .createUserWithEmailAndPassword(email, password)
       .then(authUser => db.registerUser(authUser.user.uid, email))
       .then(() => {
-        Router.push('/account');
+        Router.push('/account')
       })
       .catch(error => {
         console.log('error', error)

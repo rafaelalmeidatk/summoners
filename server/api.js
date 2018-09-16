@@ -33,7 +33,7 @@ module.exports = () => {
   })
 
   // Summoner by name
-  router.get('/summoner/byName/:region/:name', (req, res) => {
+  router.get('/summoner/by-name/:region/:name', (req, res) => {
     const { region, name } = req.params
     if (!region || !name) return res.status(400)
 

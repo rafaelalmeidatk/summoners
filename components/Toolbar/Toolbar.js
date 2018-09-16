@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Link from 'next/link'
+import { connect } from 'react-redux'
 
 export const height = '60px'
 
-const Toolbar = ({ className }) => (
+const Toolbar = ({ className, authenticatedUser }) => (
   <div className="toolbar">
     <style jsx>{`
       .toolbar {
@@ -45,16 +47,28 @@ const Toolbar = ({ className }) => (
               Invocadores
             </a>
           </li>
-          <li className="nav-item">
-            <a href="/" className="nav-link">
-              Entrar
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="/" className="nav-link">
-              Registrar
-            </a>
-          </li>
+          {authenticatedUser ? (
+            <li className="nav-item">
+              <a href="">{authenticatedUser.name}</a>
+            </li>
+          ) : (
+            <React.Fragment>
+              <li className="nav-item">
+                <Link href="/login ">
+                  <a href="/" className="nav-link">
+                    Entrar
+                  </a>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link href="/register ">
+                  <a href="/" className="nav-link">
+                    Registrar
+                  </a>
+                </Link>
+              </li>
+            </React.Fragment>
+          )}
         </ul>
       </div>
     </div>
@@ -69,4 +83,8 @@ Toolbar.defaultProps = {
   className: undefined,
 }
 
-export default Toolbar
+const mapStateToProps = ({ session }) => ({
+  authenticatedUser: session.user,
+})
+
+export default connect(mapStateToProps)(Toolbar)

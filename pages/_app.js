@@ -19,7 +19,7 @@ class MyApp extends App {
             rel="stylesheet"
           />
         </Head>
-        
+
         <Provider store={reduxStore}>
           <WithAuthentication>
             <Component {...pageProps} />

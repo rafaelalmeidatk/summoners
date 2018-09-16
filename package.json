@@ -5,7 +5,7 @@
     "dev": "nodemon server/index.js",
     "build": "next build",
     "start": "NODE_ENV=production node server/index.js",
-    "prettier": "prettier \"{components,firebase,pages,__{tests,mocks}__}/**/*.js\" --write"
+    "prettier": "prettier \"{lib,ducks,server,components,firebase,pages,__{tests,mocks}__}/**/*.js\" --write"
   },
   "dependencies": {
     "@zeit/next-css": "^0.2.0",

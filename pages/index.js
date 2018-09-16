@@ -80,7 +80,7 @@ export default class extends React.Component {
         <div className="container py-5">
           <div className="presentation">
             <h2>Looking for someone to play with?</h2>
-            <h3>Meet your next duo or team mates!</h3>
+            <h3>Meet your next duo or teammates!</h3>
 
             <p>
               Bellow you can see all the summoners that are looking for company, use the filter and

@@ -2,6 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { getTierIcon } from '../../lib/tierIcons'
 
+const getRankedName = (rank, tier) => {
+  if (!rank || !tier) return ''
+  if (tier.toLowerCase() === 'challenger' || tier.toLowerCase() === 'master') return tier
+  return tier + ' ' + rank
+}
+
 const PlayerCard = ({ player, className }) => {
   const { primaryRole, secondaryRole, lookingFor, profileIconId, rank, tier, lastPlayed } = player
 
@@ -9,7 +15,7 @@ const PlayerCard = ({ player, className }) => {
     primaryRole === secondaryRole ? primaryRole : `${primaryRole} - ${secondaryRole}`
 
   const isRanked = rank && tier
-  const rankedName = isRanked && tier + ' ' + rank
+  const rankedName = isRanked && getRankedName(rank, tier)
 
   return (
     <div className={`playerCardWrapper${className ? ` ${className}` : ''}`}>

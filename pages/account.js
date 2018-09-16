@@ -9,12 +9,12 @@ const AccountPage = ({ user }) => (
     <div className="container py-5">
       <h1>My account</h1>
 
-      <h2>Email</h2>
-      <p>dasdas@dasdsa.com</p>
+      <h3>Email</h3>
+      <p>{user ? user.email : 'Loading...'}</p>
 
       {user && (
         <>
-          <h2>Primary role</h2>
+          <h3>Primary role</h3>
           <UserDatabaseFieldSelectInput userId={user.uid} fieldName="primaryRole">
             <option>TOP</option>
             <option>MID</option>
@@ -24,7 +24,7 @@ const AccountPage = ({ user }) => (
             <option>SUP</option>
           </UserDatabaseFieldSelectInput>
 
-          <h2>Secondary role</h2>
+          <h3>Secondary role</h3>
           <UserDatabaseFieldSelectInput userId={user.uid} fieldName="secondaryRole">
             <option>TOP</option>
             <option>MID</option>
@@ -34,7 +34,7 @@ const AccountPage = ({ user }) => (
             <option>SUP</option>
           </UserDatabaseFieldSelectInput>
 
-          <h2>Looking for a</h2>
+          <h3>Looking for a</h3>
           <UserDatabaseFieldSelectInput userId={user.uid} fieldName="lookingFor">
             <option>Duo</option>
             <option>3v3 Team</option>
@@ -43,9 +43,10 @@ const AccountPage = ({ user }) => (
         </>
       )}
 
-      <h2>LoL account</h2>
+      <h3>LoL account</h3>
       <LoLAccountIntegration />
     </div>
+
     <style jsx>{`
       .container-wrapper {
         background: url('./static/img/freljord.jpg') no-repeat center center / cover;
@@ -55,7 +56,7 @@ const AccountPage = ({ user }) => (
         background: rgba(0, 0, 0, 0.3);
         padding: 3rem 2rem;
       }
-      h2 {
+      h3 {
         margin-top: 24px;
       }
     `}</style>

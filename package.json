@@ -1,6 +1,7 @@
 {
   "name": "summoners",
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "dev": "nodemon server/index.js",
     "build": "next build",

@@ -16,6 +16,7 @@ const players = [
     tier: 'BRONZE',
     profileIconId: 983,
     lastPlayed: 141,
+    region: 'BR1',
   },
 ]
 const heroHeight = '400px'
@@ -32,7 +33,7 @@ export default class extends React.Component {
     const stateUsers = arrayUsers
       .map(u => this.convertUserDataToPlayerCardData(u))
       .filter(user => user.displayName)
-      
+
     this.setState({ users: stateUsers, loading: false })
   }
 
@@ -45,7 +46,6 @@ export default class extends React.Component {
   }
 
   convertUserDataToPlayerCardData = userData => {
-    console.log(userData)
     return {
       uuid: userData.id,
       displayName: userData.summonerName,
@@ -56,6 +56,7 @@ export default class extends React.Component {
       tier: this.extractRelevantRankedData(userData.linkData).tier,
       profileIconId: userData.summonerProfileIconId,
       lastPlayed: userData.linkData && userData.linkData.lastPlayed,
+      region: userData.region,
     }
   }
 

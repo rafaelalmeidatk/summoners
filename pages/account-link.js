@@ -32,10 +32,10 @@ class AccountLinkPage extends React.Component {
 
     // First verify the integration code
     RiotApi.verifyIntegrationCode(region, integrationCode, summonerData.id)
-      .then(() => RiotApi.getSummonerRankedData(region, summonerData.id))
-      .then(rankedRes => rankedRes.data)
-      .then(rankedData =>
-        db.linkSummonerWithUser(user.uid, summonerData, rankedData).then(() => {
+      .then(() => RiotApi.getSummonerLinkData(region, summonerData.id))
+      .then(linkRes => linkRes.data)
+      .then(linkData =>
+        db.linkSummonerWithUser(user.uid, summonerData, linkData).then(() => {
           Router.push('/account')
         }),
       )

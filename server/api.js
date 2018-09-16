@@ -46,17 +46,38 @@ module.exports = () => {
       .catch(err => genericErrorHandler(res, err))
   })
 
-  // Get ranked data
-  router.get('/league-positions/:region/:summonerId', (req, res) => {
+  // Get link data
+  router.get('/link-data/:region/:summonerId', (req, res) => {
     const { region, summonerId } = req.params
     if (!region || !summonerId) return res.sendStatus(400)
+    
+    let accountId = null
+    const linkData = {}
 
-    riotApi
-      .get(endpoint(region, 'league/v3/positions/by-summoner/' + summonerId))
-      .then(apiRes => {
-        const { data } = apiRes
-        res.send(data)
-      })
+    Promise.resolve()
+      .then(() =>
+        riotApi.get(endpoint(region, 'summoner/v3/summoners/' + summonerId)).then(apiRes => {
+          const { data } = apiRes
+          accountId = data.accountId
+        }),
+      )
+      .then(() =>
+        riotApi
+          .get(endpoint(region, 'league/v3/positions/by-summoner/' + summonerId))
+          .then(apiRes => {
+            const { data } = apiRes
+            linkData.rankedData = data
+          }),
+      )
+      .then(() =>
+        riotApi
+          .get(endpoint(region, 'match/v3/matchlists/by-account/' + accountId + '?endIndex=1'))
+          .then(apiRes => {
+            const { data } = apiRes
+            linkData.lastPlayed = data.matches[0] && data.matches[0].champion
+          }),
+      )
+      .then(() => res.send(linkData))
       .catch(err => genericErrorHandler(res, err))
   })
 
@@ -64,8 +85,6 @@ module.exports = () => {
   router.get('/summoner-page/:region/:summonerName', (req, res) => {
     const { region, summonerName } = req.params
     if (!region || !summonerName) return res.sendStatus(400)
-
-    console.log('arrived here', region, summonerName)
 
     let summonerId = null
     let accountId = null
@@ -79,7 +98,6 @@ module.exports = () => {
             const { data } = apiRes
             summonerId = data.id
             accountId = data.accountId
-            console.log(accountId)
 
             pageData.summonerName = data.name
             pageData.summonerLevel = data.summonerLevel
@@ -185,7 +203,6 @@ module.exports = () => {
           }),
       )
       .then(() => res.send(pageData))
-
       .catch(err => genericErrorHandler(res, err))
   })
 

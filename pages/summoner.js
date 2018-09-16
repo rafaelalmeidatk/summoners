@@ -9,6 +9,7 @@ import RetrievingSummonerData from '../components/RetrievingSummonerData'
 import Layout from '../components/Layout'
 import { height as toolbarHeight } from '../components/Toolbar/Toolbar'
 import MostPlayedChampion from '../components/MostPlayedChampion'
+import MatchesList from '../components/MatchesList'
 
 const heroHeight = '400px'
 
@@ -41,7 +42,7 @@ class SummonerPage extends React.Component {
     this.setState({
       loading: false,
       data: JSON.parse(
-        '{"summonerName":"Konoke Tk","summonerLevel":45,"profileIconId":983,"tier":"BRONZE","rank":"I","wins":4,"losses":8,"lastPlayed":141,"mostPlayed":[{"championId":"141","masteryLevel":5},{"championId":"51","masteryLevel":3},{"championId":"64","masteryLevel":7}],"matches":[{"gameDuration":2268,"spell1Id":11,"spell2Id":4,"win":true,"item0":1400,"item1":3211,"item2":3071,"item3":3111,"item4":3053,"item5":0,"item6":3340,"kills":4,"deaths":10,"assists":14},{"gameDuration":2046,"spell1Id":11,"spell2Id":4,"win":true,"item0":1419,"item1":3006,"item2":3031,"item3":3087,"item4":1042,"item5":0,"item6":3363,"kills":7,"deaths":13,"assists":14},{"gameDuration":1471,"spell1Id":11,"spell2Id":4,"win":true,"item0":1412,"item1":2031,"item2":3117,"item3":3071,"item4":3742,"item5":0,"item6":3340,"kills":9,"deaths":6,"assists":9},{"gameDuration":1467,"spell1Id":7,"spell2Id":4,"win":false,"item0":1055,"item1":3006,"item2":3031,"item3":3086,"item4":0,"item5":0,"item6":3340,"kills":2,"deaths":8,"assists":6},{"gameDuration":921,"spell1Id":7,"spell2Id":4,"win":true,"item0":1055,"item1":3031,"item2":3006,"item3":3094,"item4":0,"item5":0,"item6":3340,"kills":11,"deaths":1,"assists":2}]}',
+        '{"summonerName":"Konoke Tk","summonerLevel":45,"profileIconId":983,"tier":"BRONZE","rank":"I","wins":4,"losses":8,"lastPlayed":141,"mostPlayed":[{"championId":"141","masteryLevel":5},{"championId":"51","masteryLevel":3},{"championId":"64","masteryLevel":7}],"matches":[{"id":1384684365,"championId":141,"gameDuration":2268,"spell1Id":11,"spell2Id":4,"win":true,"item0":1400,"item1":3211,"item2":3071,"item3":3111,"item4":3053,"item5":0,"item6":3340,"kills":4,"deaths":10,"assists":14},{"id":1384660285,"championId":11,"gameDuration":2046,"spell1Id":11,"spell2Id":4,"win":true,"item0":1419,"item1":3006,"item2":3031,"item3":3087,"item4":1042,"item5":0,"item6":3363,"kills":7,"deaths":13,"assists":14},{"id":1384609167,"championId":64,"gameDuration":1471,"spell1Id":11,"spell2Id":4,"win":true,"item0":1412,"item1":2031,"item2":3117,"item3":3071,"item4":3742,"item5":0,"item6":3340,"kills":9,"deaths":6,"assists":9},{"id":1384121359,"championId":67,"gameDuration":1467,"spell1Id":7,"spell2Id":4,"win":false,"item0":1055,"item1":3006,"item2":3031,"item3":3086,"item4":0,"item5":0,"item6":3340,"kills":2,"deaths":8,"assists":6},{"id":1384107937,"championId":67,"gameDuration":921,"spell1Id":7,"spell2Id":4,"win":true,"item0":1055,"item1":3031,"item2":3006,"item3":3094,"item4":0,"item5":0,"item6":3340,"kills":11,"deaths":1,"assists":2}]}',
       ),
     })
     return
@@ -64,45 +65,62 @@ class SummonerPage extends React.Component {
         <div className="container py-5">
           {loading && <RetrievingSummonerData />}
           {data && (
-            <Row>
-              <Col md={6}>
-                <div className="profile-data-wrapper">
-                  <div
-                    className="profile-icon"
-                    style={{
-                      backgroundImage: `url('http://ddragon.leagueoflegends.com/cdn/8.18.2/img/profileicon/${
-                        data.profileIconId
-                      }.png')`,
-                    }}
-                  />
-                  <div className="profile-data">
-                    <div>
-                      <div className="profile-name">{data.summonerName}</div>
-                      <div className="profile-level">Level {data.summonerLevel}</div>
+            <>
+              <Row>
+                <Col md={6}>
+                  <div className="profile-data-wrapper">
+                    <div
+                      className="profile-icon"
+                      style={{
+                        backgroundImage: `url('http://ddragon.leagueoflegends.com/cdn/8.18.2/img/profileicon/${
+                          data.profileIconId
+                        }.png')`,
+                      }}
+                    />
+                    <div className="profile-data">
+                      <div>
+                        <div className="profile-name">{data.summonerName}</div>
+                        <div className="profile-level">Level {data.summonerLevel}</div>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="stats">
-                  <div className="stat-block">
-                    <img
-                      src={this.props.baseUrl + '/' + getTierIcon(data.tier, data.rank)}
-                      alt={getRankedName(data.rank, data.tier)}
-                      className="tier-image"
-                    />
-                    <div className="tier-name">{getRankedName(data.rank, data.tier)}</div>
+                  <div className="stats">
+                    <div className="stat-block">
+                      <img
+                        src={this.props.baseUrl + '/' + getTierIcon(data.tier, data.rank)}
+                        alt={getRankedName(data.rank, data.tier)}
+                        className="tier-image"
+                      />
+                      <div className="tier-name">{getRankedName(data.rank, data.tier)}</div>
+                    </div>
+                    <div className="stat-block">
+                      <div className="win-loss-value">{data.wins}</div>
+                      <div className="win-loss-label">Wins</div>
+                    </div>
+                    <div className="stat-block">
+                      <div className="win-loss-value">{data.losses}</div>
+                      <div className="win-loss-label">Losses</div>
+                    </div>
                   </div>
-                </div>
-              </Col>
-              <Col md={6}>
-                <h2>Most played</h2>
-                <div className="most-played-col">
-                  {data.mostPlayed.map(played => (
-                    <MostPlayedChampion championId={played.championId} />
-                  ))}
-                </div>
-              </Col>
-            </Row>
+                </Col>
+                <Col md={6}>
+                  <h2>Most played</h2>
+                  <div className="most-played-col">
+                    {data.mostPlayed.map((played, index) => (
+                      <MostPlayedChampion key={index} championId={played.championId} />
+                    ))}
+                  </div>
+                </Col>
+              </Row>
+
+              <Row style={{ marginTop: 36 }}>
+                <Col>
+                  <h2>Matches</h2>
+                  <MatchesList matches={data.matches} />
+                </Col>
+              </Row>
+            </>
           )}
         </div>
 
@@ -137,6 +155,9 @@ class SummonerPage extends React.Component {
 
           .stats {
             margin-top: 24px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
           }
 
           .stat-block {
@@ -159,7 +180,20 @@ class SummonerPage extends React.Component {
 
           .tier-image {
             display: block;
-            width: 100%;
+            width: 90%;
+          }
+
+          .win-loss-value {
+            text-align: center;
+            font-weight: bold;
+            font-size: 2.5em;
+            line-height: 1em;
+            color: rgba(255, 255, 255, 0.9);
+          }
+          .win-loss-label {
+            text-align: center;
+            font-size: 1.1em;
+            color: rgba(100, 100, 100, 0.9);
           }
 
           .most-played-col {

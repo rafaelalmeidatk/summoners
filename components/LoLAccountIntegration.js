@@ -28,11 +28,14 @@ class LoLAccountIntegration extends React.Component {
     return (
       <div>
         {this.state.summonerId && (
-          <Alert color="success">Your summoner is linked with your account!</Alert>
+          <Alert color="success">
+            <p>Your summoner is linked with your account!</p>
+            <p>You can still switch with another account clicking <Link href="/account-link">here</Link>.</p>
+          </Alert>
         )}
         {!this.state.summonerId && (
           <Alert color="warning">
-            <p>Oops, seems your don't have an account linked yet.</p>
+            <p>Oops, seems your don't have an account linked yet. Without it your summoner won't appear on the home page.</p>
             <p>
               Click <Link href="/account-link">here</Link> to link your account!
             </p>

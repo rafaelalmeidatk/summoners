@@ -6,6 +6,9 @@ import { Provider } from 'react-redux'
 import WithAuthentication from '../components/WithAuthentication'
 import withReduxStore from '../lib/with-redux-store'
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../static/css/style.css'
+
 class MyApp extends App {
   render() {
     const { Component, pageProps, reduxStore } = this.props

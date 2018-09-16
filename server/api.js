@@ -182,6 +182,8 @@ module.exports = () => {
               const { stats } = participant
 
               matches.push({
+                id: matchData.gameId,
+                championId: participant.championId,
                 gameDuration: matchData.gameDuration,
                 spell1Id: participant.spell1Id,
                 spell2Id: participant.spell2Id,

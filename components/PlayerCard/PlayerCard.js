@@ -10,8 +10,8 @@ const PlayerCard = ({ player, className }) => {
     : `${primaryRole} - ${secondaryRole}`
   ).toUpperCase()
 
-  const isRanked = rank && tier;
-  const rankedName = isRanked && tier.toUpperCase() + ' ' + rank;
+  const isRanked = rank && tier
+  const rankedName = isRanked && tier.toUpperCase() + ' ' + rank
 
   return (
     <div className={`playerCardWrapper${className ? ` ${className}` : ''}`}>
@@ -28,7 +28,7 @@ const PlayerCard = ({ player, className }) => {
           <span
             className="avatar"
             style={{
-              backgroundImage: `url('http://ddragon.leagueoflegends.com/cdn/7.24.2/img/profileicon/${profileIconId}.png')`,
+              backgroundImage: `url('http://ddragon.leagueoflegends.com/cdn/8.18.2/img/profileicon/${profileIconId}.png')`,
             }}
           />
           <h2 className="name">{player.displayName}</h2>

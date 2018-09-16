@@ -19,11 +19,19 @@ export const getUserData = id => {
   })
 }
 
-export const linkSummonerWithUser = (userId, summonerData) => {
+export const linkSummonerWithUser = (userId, summonerData, rankedData) => {
   return db.ref(`users/${userId}`).update({
+    riotAccountId: summonerData.accountId,
     summonerId: summonerData.id,
     summonerName: summonerData.name,
     summonerProfileIconId: summonerData.profileIconId,
     summonerLevel: summonerData.summonerLevel,
+    rankedData,
+  })
+}
+
+export const updateProfileField = (userId, field, value) => {
+  return db.ref(`users/${userId}/profile`).update({
+    [field]: value,
   })
 }

@@ -11,11 +11,10 @@ export default () => (
       }
 
       .hero-inner {
-        background: rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.7);
         width: 100%;
-        height: 100%;
+        min-height: 100vh;
         padding-top: ${toolbarHeight};
-        min-height: 500px;
       }
     `}</style>
     <div className="hero">

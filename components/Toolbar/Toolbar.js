@@ -29,6 +29,11 @@ const Toolbar = ({ className, authenticatedUser }) => (
         color: #c9b987 !important;
       }
 
+      .nav-link:hover {
+        box-shadow: 0 1px rgba(255, 255, 255, 0.15);
+        color: #fff !important;
+      }
+
       .nav-link.active {
         color: #fff !important;
         background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
@@ -48,9 +53,18 @@ const Toolbar = ({ className, authenticatedUser }) => (
             </a>
           </li>
           {authenticatedUser ? (
-            <li className="nav-item">
-              <a href="">{authenticatedUser.name}</a>
-            </li>
+            <React.Fragment>
+              <li className="nav-item">
+                <a href="" className="nav-link">
+                  {authenticatedUser.displayName || 'My account'}
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="" className="nav-link">
+                  Sair
+                </a>
+              </li>
+            </React.Fragment>
           ) : (
             <React.Fragment>
               <li className="nav-item">

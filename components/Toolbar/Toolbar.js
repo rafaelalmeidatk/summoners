@@ -48,16 +48,16 @@ const Toolbar = ({ className, authenticatedUser }) => (
         <div className="mr-auto" />
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a href="/" className="nav-link active">
-              Players
-            </a>
+            <Link href="/">
+              <a className="nav-link active">Players</a>
+            </Link>
           </li>
           {authenticatedUser ? (
             <React.Fragment>
               <li className="nav-item">
-                <a href="" className="nav-link">
-                  {authenticatedUser.displayName || 'My account'}
-                </a>
+                <Link href="/account">
+                  <a className="nav-link">{authenticatedUser.displayName || 'My account'}</a>
+                </Link>
               </li>
               <li className="nav-item">
                 <a href="/logout" className="nav-link">

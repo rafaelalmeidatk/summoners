@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 export const height = '60px'
 
 const Toolbar = ({ className, authenticatedUser }) => (
-  <div className="toolbar">
+  <div className={`toolbar${className ? ` ${className}` : ''}`}>
     <style jsx>{`
       .toolbar {
         height: ${height};
@@ -78,9 +78,6 @@ const Toolbar = ({ className, authenticatedUser }) => (
 Toolbar.displayName = 'Toolbar'
 Toolbar.propTypes = {
   className: PropTypes.string,
-}
-Toolbar.defaultProps = {
-  className: undefined,
 }
 
 const mapStateToProps = ({ session }) => ({

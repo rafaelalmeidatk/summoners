@@ -11,14 +11,7 @@ import RiotApi from '../lib/riotApi'
 
 class AccountLinkPage extends React.Component {
   state = {
-    summonerData: {
-      accountId: 200713582,
-      id: 2489808,
-      name: 'Konoke Tk',
-      profileIconId: 983,
-      revisionDate: 1527016193000,
-      summonerLevel: 45,
-    },
+    summonerData: null,
     integrationCode: null,
     verifying: false,
     errorMessage: null,
@@ -62,7 +55,7 @@ class AccountLinkPage extends React.Component {
               {this.state.summonerData && (
                 <div className="integration-code-container">
                   <h2>Insert the following code on your LoL client</h2>
-                  <div className="integration-code">3210312932</div>
+                  <div className="integration-code">{this.state.integrationCode}</div>
                   <Button
                     color="primary"
                     onClick={this.handleVerify}

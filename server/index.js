@@ -7,10 +7,10 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-app.prepare().then(() => {
+app.prepare().then(async () => {
   const server = express()
 
-  server.use(api())
+  server.use(await api())
 
   // Summoner page
   server.get('/summoner/:region/:summonerName', (req, res) => {

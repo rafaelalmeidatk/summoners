@@ -3,11 +3,23 @@ const axios = require('axios').default
 
 const endpoint = (region, url) => `https://${region}.api.riotgames.com/lol/${url}`
 
-module.exports = () => {
+const getApiKey = () => {
+  return axios.get('https://summoners-4f7e5.firebaseio.com/riot_token.json')
+}
+
+module.exports = async () => {
   const router = express.Router()
-  const riotApi = axios.create({
-    headers: { 'X-Riot-Token': 'RGAPI-0cf2e377-066d-4db8-ab8e-ea91887a8659' },
-  })
+
+  const riotApi = apiKey =>
+    axios.create({
+      headers: { 'X-Riot-Token': apiKey },
+    })
+
+  let riotApiKey = (await getApiKey()).data
+  setInterval(async () => {
+    riotApiKey = (await getApiKey()).data
+  }, 60000)
+
   const genericErrorHandler = (res, error) => {
     // Forward status code from Riot API
     if (error && error.response && error.response.status) {
@@ -22,7 +34,7 @@ module.exports = () => {
     const { region, code, summonerId } = req.params
     if (!region || !code || !summonerId) return res.sendStatus(400)
 
-    riotApi
+    riotApi(riotApiKey)
       .get(endpoint(region, 'platform/v3/third-party-code/by-summoner/' + summonerId))
       .then(apiRes => {
         const { data } = apiRes
@@ -37,7 +49,7 @@ module.exports = () => {
     const { region, name } = req.params
     if (!region || !name) return res.sendStatus(400)
 
-    riotApi
+    riotApi(riotApiKey)
       .get(endpoint(region, 'summoner/v3/summoners/by-name/' + encodeURI(name)))
       .then(apiRes => {
         const { data } = apiRes
@@ -56,13 +68,15 @@ module.exports = () => {
 
     Promise.resolve()
       .then(() =>
-        riotApi.get(endpoint(region, 'summoner/v3/summoners/' + summonerId)).then(apiRes => {
-          const { data } = apiRes
-          accountId = data.accountId
-        }),
+        riotApi(riotApiKey)
+          .get(endpoint(region, 'summoner/v3/summoners/' + summonerId))
+          .then(apiRes => {
+            const { data } = apiRes
+            accountId = data.accountId
+          }),
       )
       .then(() =>
-        riotApi
+        riotApi(riotApiKey)
           .get(endpoint(region, 'league/v3/positions/by-summoner/' + summonerId))
           .then(apiRes => {
             const { data } = apiRes
@@ -70,7 +84,7 @@ module.exports = () => {
           }),
       )
       .then(() =>
-        riotApi
+        riotApi(riotApiKey)
           .get(endpoint(region, 'match/v3/matchlists/by-account/' + accountId + '?endIndex=1'))
           .then(apiRes => {
             const { data } = apiRes
@@ -92,7 +106,7 @@ module.exports = () => {
 
     Promise.resolve()
       .then(() =>
-        riotApi
+        riotApi(riotApiKey)
           .get(endpoint(region, 'summoner/v3/summoners/by-name/' + encodeURI(summonerName)))
           .then(apiRes => {
             const { data } = apiRes
@@ -105,7 +119,7 @@ module.exports = () => {
           }),
       )
       .then(() =>
-        riotApi
+        riotApi(riotApiKey)
           .get(endpoint(region, 'league/v3/positions/by-summoner/' + summonerId))
           .then(apiRes => {
             const { data } = apiRes
@@ -120,7 +134,7 @@ module.exports = () => {
           }),
       )
       .then(() =>
-        riotApi
+        riotApi(riotApiKey)
           .get(endpoint(region, 'match/v3/matchlists/by-account/' + accountId))
           .then(apiRes => {
             const { data } = apiRes
@@ -157,7 +171,7 @@ module.exports = () => {
           }),
       )
       .then(() =>
-        riotApi
+        riotApi(riotApiKey)
           .get(endpoint(region, 'match/v3/matchlists/by-account/' + accountId))
           .then(async apiRes => {
             const { data } = apiRes
@@ -167,7 +181,7 @@ module.exports = () => {
               const match = data.matches[i]
               if (!match) continue
 
-              const matchData = (await riotApi.get(
+              const matchData = (await riotApi(riotApiKey).get(
                 endpoint(region, 'match/v3/matches/' + match.gameId),
               )).data
 
@@ -205,7 +219,7 @@ module.exports = () => {
           }),
       )
       .then(() =>
-        riotApi
+        riotApi(riotApiKey)
           .get(endpoint(region, 'champion-mastery/v3/champion-masteries/by-summoner/' + summonerId))
           .then(async apiRes => {
             const { data } = apiRes

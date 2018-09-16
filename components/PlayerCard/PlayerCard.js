@@ -44,7 +44,7 @@ const PlayerCard = ({ player, className }) => {
             <span
               className="avatar"
               style={{
-                backgroundImage: `url('http://ddragon.leagueoflegends.com/cdn/8.18.2/img/profileicon/${profileIconId}.png')`,
+                backgroundImage: `url('https://ddragon.leagueoflegends.com/cdn/8.18.2/img/profileicon/${profileIconId}.png')`,
               }}
             />
             <h2 className="name">{player.displayName}</h2>

@@ -7,42 +7,9 @@ export const height = '60px'
 
 const Toolbar = ({ className, authenticatedUser }) => (
   <div className={`toolbar${className ? ` ${className}` : ''}`}>
-    <style jsx>{`
-      .toolbar {
-        height: ${height};
-        color: #fff;
-        position: fixed;
-        left: 0;
-        top: 0;
-        right: 0;
-      }
-
-      .navbar {
-        padding-top: 0;
-        padding-bottom: 0;
-        box-shadow: 0 1px rgba(255, 255, 255, 0.1);
-      }
-
-      .nav-link {
-        height: ${height};
-        padding: 20px 15px !important;
-        color: #c9b987 !important;
-      }
-
-      .nav-link:hover {
-        box-shadow: 0 1px rgba(255, 255, 255, 0.15);
-        color: #fff !important;
-      }
-
-      .nav-link.active {
-        color: #fff !important;
-        background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-        box-shadow: 0 1px rgba(255, 255, 255, 0.15);
-      }
-    `}</style>
     <div className="container">
       <div className="navbar px-0 navbar-dark navbar-expand">
-        <a className="navbar-brand" href="/">
+        <a className="navbar-brand navbar-logo" href="/">
           Summoners
         </a>
         <div className="mr-auto" />
@@ -81,6 +48,48 @@ const Toolbar = ({ className, authenticatedUser }) => (
         </ul>
       </div>
     </div>
+
+    <style jsx>{`
+      .toolbar {
+        height: ${height};
+        color: #fff;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        z-index: 999;
+        background: rgba(0, 10, 20, 0.4);
+      }
+
+      .navbar {
+        padding-top: 0;
+        padding-bottom: 0;
+        box-shadow: 0 1px rgba(255, 255, 255, 0.1);
+      }
+
+      .navbar-logo {
+        padding-left: 16px;
+        font-family: 'Montserrat', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+        font-weight: bold;
+      }
+
+      .nav-link {
+        height: ${height};
+        padding: 20px 15px !important;
+        color: #c9b987 !important;
+      }
+
+      .nav-link:hover {
+        box-shadow: 0 1px rgba(255, 255, 255, 0.15);
+        color: #fff !important;
+      }
+
+      .nav-link.active {
+        color: #fff !important;
+        background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+        box-shadow: 0 1px rgba(255, 255, 255, 0.15);
+      }
+    `}</style>
   </div>
 )
 

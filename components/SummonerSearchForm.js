@@ -19,7 +19,7 @@ const formikEnhancer = withFormik({
     RiotApi.findSummonerByName(regionCode, summonerName)
       .then(res => {
         const { data } = res
-        props.onSummonerData(data)
+        props.onSummonerData(regionCode, data)
       })
       .catch(error => {
         console.log('error!', error)

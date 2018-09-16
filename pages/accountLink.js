@@ -11,25 +11,26 @@ import RiotApi from '../lib/riotApi'
 
 class AccountLinkPage extends React.Component {
   state = {
+    region: null,
     summonerData: null,
     integrationCode: null,
     verifying: false,
     errorMessage: null,
   }
 
-  handleSummonerData = summonerData => {
+  handleSummonerData = (region, summonerData) => {
     const { user } = this.props
     db.getUserData(user.uid).then(data => {
-      this.setState({ summonerData, integrationCode: data.integrationCode })
+      this.setState({ region, summonerData, integrationCode: data.integrationCode })
     })
   }
 
   handleVerify = () => {
     this.setState({ verifying: true })
     const { user } = this.props
-    const { integrationCode, summonerData } = this.state
+    const { region, summonerData, integrationCode } = this.state
 
-    RiotApi.verifyIntegrationCode(integrationCode, summonerData.id)
+    RiotApi.verifyIntegrationCode(region, integrationCode, summonerData.id)
       .then(() => {
         console.log('Link successful')
         return db.linkSummonerWithUser(user.uid, summonerData).then(() => {

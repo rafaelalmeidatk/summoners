@@ -48,14 +48,6 @@ const AccountPage = ({ user }) => (
     </div>
 
     <style jsx>{`
-      .container-wrapper {
-        background: url('./static/img/freljord.jpg') no-repeat center center / cover;
-        min-height: 100vh;
-      }
-      .content {
-        background: rgba(0, 0, 0, 0.3);
-        padding: 3rem 2rem;
-      }
       h3 {
         margin-top: 24px;
       }

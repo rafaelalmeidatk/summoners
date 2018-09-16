@@ -49,7 +49,7 @@ const Toolbar = ({ className, authenticatedUser }) => (
         <ul className="navbar-nav">
           <li className="nav-item">
             <a href="/" className="nav-link active">
-              Invocadores
+              Players
             </a>
           </li>
           {authenticatedUser ? (
@@ -60,8 +60,8 @@ const Toolbar = ({ className, authenticatedUser }) => (
                 </a>
               </li>
               <li className="nav-item">
-                <a href="" className="nav-link">
-                  Sair
+                <a href="/logout" className="nav-link">
+                  Log out
                 </a>
               </li>
             </React.Fragment>
@@ -70,14 +70,14 @@ const Toolbar = ({ className, authenticatedUser }) => (
               <li className="nav-item">
                 <Link href="/login ">
                   <a href="/" className="nav-link">
-                    Entrar
+                    Login
                   </a>
                 </Link>
               </li>
               <li className="nav-item">
                 <Link href="/register ">
                   <a href="/" className="nav-link">
-                    Registrar
+                    Register
                   </a>
                 </Link>
               </li>

@@ -22,7 +22,7 @@ const getOpGgLink = (region, summonerName) => {
   if (parseInt(region[region.length - 1], 10) >= 0) {
     regionCode = region.substring(0, region.length - 1)
   }
-  return `http://${regionCode}.op.gg/summoner/userName=${summonerName}`
+  return `https://${regionCode}.op.gg/summoner/userName=${summonerName}`
 }
 
 class SummonerPage extends React.Component {
@@ -34,7 +34,7 @@ class SummonerPage extends React.Component {
     return {
       region,
       summonerName,
-      baseUrl: `${protocol}://${host}`,
+      baseUrl: `https://${host}`,
     }
   }
 
@@ -115,7 +115,7 @@ class SummonerPage extends React.Component {
               <Row style={{ marginTop: 62 }}>
                 <Col>
                   <div className="opdotgg">
-                    <img src="http://opgg-static.akamaized.net/images/logo/logo-opgg.png" />
+                    <img src="https://opgg-static.akamaized.net/images/logo/logo-opgg.png" />
                     <h4>
                       Wanna see more data? Check this summoner on{' '}
                       <Link href={getOpGgLink(region, summonerName)}>op.gg</Link>{' '}

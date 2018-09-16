@@ -47,11 +47,6 @@ const Toolbar = ({ className, authenticatedUser }) => (
         </a>
         <div className="mr-auto" />
         <ul className="navbar-nav">
-          <li className="nav-item">
-            <Link href="/">
-              <a className="nav-link active">Players</a>
-            </Link>
-          </li>
           {authenticatedUser ? (
             <React.Fragment>
               <li className="nav-item">

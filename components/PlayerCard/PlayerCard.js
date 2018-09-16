@@ -5,13 +5,11 @@ import { getTierIcon } from '../../lib/tierIcons'
 const PlayerCard = ({ player, className }) => {
   const { primaryRole, secondaryRole, lookingFor, profileIconId, rank, tier, lastPlayed } = player
 
-  const rolesText = (primaryRole === secondaryRole
-    ? primaryRole
-    : `${primaryRole} - ${secondaryRole}`
-  ).toUpperCase()
+  const rolesText =
+    primaryRole === secondaryRole ? primaryRole : `${primaryRole} - ${secondaryRole}`
 
   const isRanked = rank && tier
-  const rankedName = isRanked && tier.toUpperCase() + ' ' + rank
+  const rankedName = isRanked && tier + ' ' + rank
 
   return (
     <div className={`playerCardWrapper${className ? ` ${className}` : ''}`}>
@@ -23,7 +21,7 @@ const PlayerCard = ({ player, className }) => {
       >
         <div className="inner">
           <span className="header">
-            <div className="lookinFor">{lookingFor.toUpperCase()}</div>
+            <div className="lookinFor">{lookingFor || 'Not Specified'}</div>
           </span>
           <span
             className="avatar"
@@ -32,7 +30,7 @@ const PlayerCard = ({ player, className }) => {
             }}
           />
           <h2 className="name">{player.displayName}</h2>
-          <div className="roles">{rolesText}</div>
+          <div className="roles">{rolesText || 'Not Specified'}</div>
           <h4 className="rankName">{rankedName}</h4>
           <img src={getTierIcon(tier, rank)} alt={rankedName} className="rankImage" />
         </div>
@@ -75,6 +73,7 @@ const PlayerCard = ({ player, className }) => {
           font-weight: bold;
           font-size: 0.9em;
           margin-bottom: 10px;
+          text-transform: uppercase;
         }
 
         .rankName {
@@ -82,6 +81,7 @@ const PlayerCard = ({ player, className }) => {
           color: #e1ab36;
           font-size: 16px;
           margin-bottom: 0;
+          text-transform: uppercase;
         }
 
         .header {
@@ -100,6 +100,7 @@ const PlayerCard = ({ player, className }) => {
           font-weight: 500;
           height: 30px;
           position: relative;
+          text-transform: uppercase;
         }
 
         .lookinFor::after {

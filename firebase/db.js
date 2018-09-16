@@ -27,8 +27,9 @@ export const getUserData = id => {
   })
 }
 
-export const linkSummonerWithUser = (userId, summonerData, linkData) => {
+export const linkSummonerWithUser = (userId, region, summonerData, linkData) => {
   return db.ref(`users/${userId}`).update({
+    region,
     riotAccountId: summonerData.accountId,
     summonerId: summonerData.id,
     summonerName: summonerData.name,

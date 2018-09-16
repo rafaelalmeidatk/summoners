@@ -35,7 +35,7 @@ class AccountLinkPage extends React.Component {
       .then(() => RiotApi.getSummonerLinkData(region, summonerData.id))
       .then(linkRes => linkRes.data)
       .then(linkData =>
-        db.linkSummonerWithUser(user.uid, summonerData, linkData).then(() => {
+        db.linkSummonerWithUser(user.uid, region, summonerData, linkData).then(() => {
           Router.push('/account')
         }),
       )

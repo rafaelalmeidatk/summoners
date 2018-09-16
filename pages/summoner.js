@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import Error from 'next/error'
 import { Row, Col } from 'reactstrap'
 
@@ -8,12 +9,20 @@ import { getTierIcon } from '../lib/tierIcons'
 import RetrievingSummonerData from '../components/RetrievingSummonerData'
 import Layout from '../components/Layout'
 import MostPlayedChampion from '../components/MostPlayedChampion'
-import MatchesList from '../components/MatchesList'
 
 const getRankedName = (rank, tier) => {
   if (!rank || !tier) return ''
   if (tier.toLowerCase() === 'challenger' || tier.toLowerCase() === 'master') return tier
   return tier + ' ' + rank
+}
+
+const getOpGgLink = (region, summonerName) => {
+  if (!region || !summonerName) return null
+  let regionCode = region
+  if (parseInt(region[region.length - 1], 10) >= 0) {
+    regionCode = region.substring(0, region.length - 1)
+  }
+  return `http://${regionCode}.op.gg/summoner/userName=${summonerName}`
 }
 
 class SummonerPage extends React.Component {
@@ -103,10 +112,15 @@ class SummonerPage extends React.Component {
                 </Col>
               </Row>
 
-              <Row style={{ marginTop: 36 }}>
+              <Row style={{ marginTop: 62 }}>
                 <Col>
-                  <h2>Matches</h2>
-                  <MatchesList matches={data.matches} />
+                  <div className="opdotgg">
+                    <img src="http://opgg-static.akamaized.net/images/logo/logo-opgg.png" />
+                    <h4>
+                      Wanna see more data? Check this summoner on{' '}
+                      <Link href={getOpGgLink(region, summonerName)}>op.gg</Link>{' '}
+                    </h4>
+                  </div>
                 </Col>
               </Row>
             </>
@@ -189,6 +203,16 @@ class SummonerPage extends React.Component {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+          }
+
+          .opdotgg {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+          .opdotgg img {
+            margin-bottom: 12px;
           }
         `}</style>
       </Layout>

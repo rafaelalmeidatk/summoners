@@ -60,5 +60,51 @@ module.exports = () => {
       .catch(err => genericErrorHandler(res, err))
   })
 
+  // Get summoner page data
+  router.get('/summoner-page/:region/:summonerName', (req, res) => {
+    const { region, summonerName } = req.params
+    if (!region || !summonerName) return res.sendStatus(400)
+
+    console.log('arrived here', region, summonerName)
+
+    let summonerId = null
+    let accountId = null
+    const pageData = {}
+
+    Promise.resolve()
+      .then(() =>
+        riotApi
+          .get(endpoint(region, 'summoner/v3/summoners/by-name/' + encodeURI(summonerName)))
+          .then(apiRes => {
+            const { data } = apiRes
+            summonerId = data.id
+            accountId = data.accountId
+            console.log(accountId)
+
+            pageData.summonerName = data.name
+            pageData.summonerLevel = data.summonerLevel
+            pageData.profileIconId = data.profileIconId
+          }),
+      )
+      .then(() =>
+        riotApi
+          .get(endpoint(region, 'league/v3/positions/by-summoner/' + summonerId))
+          .then(apiRes => {
+            const { data } = apiRes
+            if (data.length === 0) return
+            const league = data[0]
+            if (!league) return
+
+            pageData.tier = league.tier
+            pageData.rank = league.rank
+            pageData.wins = league.wins
+            pageData.losses = league.losses
+          }),
+      )
+      .then(() => res.send(pageData))
+
+      .catch(err => genericErrorHandler(res, err))
+  })
+
   return router
 }

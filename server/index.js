@@ -12,6 +12,12 @@ app.prepare().then(() => {
 
   server.use(api())
 
+  // Summoner page
+  server.get('/summoner/:region/:summonerName', (req, res) => {
+    const { region, summonerName } = req.params
+    return app.render(req, res, '/summoner', { region, summonerName })
+  })
+
   server.get('*', (req, res) => {
     return handle(req, res)
   })

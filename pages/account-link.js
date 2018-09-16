@@ -29,15 +29,18 @@ class AccountLinkPage extends React.Component {
     this.setState({ verifying: true })
     const { user } = this.props
     const { region, summonerData, integrationCode } = this.state
-
+    
+    // First verify the integration code
     RiotApi.verifyIntegrationCode(region, integrationCode, summonerData.id)
-      .then(() => {
-        console.log('Link successful')
-        return db.linkSummonerWithUser(user.uid, summonerData).then(() => {
+      .then(() => RiotApi.getSummonerRankedData(region, summonerData.id))
+      .then(rankedRes => rankedRes.data)
+      .then(rankedData =>
+        db.linkSummonerWithUser(user.uid, summonerData, rankedData).then(() => {
           Router.push('/account')
-        })
-      })
-      .catch(() => {
+        }),
+      )
+      .catch(error => {
+        console.log('error', error)
         this.setState({ errorMessage: 'Something went wrong, check the code and try again.' })
         this.setState({ verifying: false })
       })

@@ -19,11 +19,12 @@ export const getUserData = id => {
   })
 }
 
-export const linkSummonerWithUser = (userId, summonerData) => {
+export const linkSummonerWithUser = (userId, summonerData, rankedData) => {
   return db.ref(`users/${userId}`).update({
     summonerId: summonerData.id,
     summonerName: summonerData.name,
     summonerProfileIconId: summonerData.profileIconId,
     summonerLevel: summonerData.summonerLevel,
+    rankedData,
   })
 }

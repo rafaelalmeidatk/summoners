@@ -6,7 +6,7 @@ const endpoint = (region, url) => `https://${region}.api.riotgames.com/lol/${url
 module.exports = () => {
   const router = express.Router()
   const riotApi = axios.create({
-    headers: { 'X-Riot-Token': 'RGAPI-c5b3a701-cd01-4904-9674-73f089e8cf22' },
+    headers: { 'X-Riot-Token': 'RGAPI-0cf2e377-066d-4db8-ab8e-ea91887a8659' },
   })
   const genericErrorHandler = (res, error) => {
     // Forward status code from Riot API
@@ -20,7 +20,7 @@ module.exports = () => {
   // Verify integration code
   router.get('/verifyCode/:region/:code/:summonerId', (req, res) => {
     const { region, code, summonerId } = req.params
-    if (!region || !code || !summonerId) return res.status(400)
+    if (!region || !code || !summonerId) return res.sendStatus(400)
 
     riotApi
       .get(endpoint(region, 'platform/v3/third-party-code/by-summoner/' + summonerId))
@@ -35,10 +35,24 @@ module.exports = () => {
   // Summoner by name
   router.get('/summoner/by-name/:region/:name', (req, res) => {
     const { region, name } = req.params
-    if (!region || !name) return res.status(400)
+    if (!region || !name) return res.sendStatus(400)
 
     riotApi
       .get(endpoint(region, 'summoner/v3/summoners/by-name/' + encodeURI(name)))
+      .then(apiRes => {
+        const { data } = apiRes
+        res.send(data)
+      })
+      .catch(err => genericErrorHandler(res, err))
+  })
+
+  // Get ranked data
+  router.get('/league-positions/:region/:summonerId', (req, res) => {
+    const { region, summonerId } = req.params
+    if (!region || !summonerId) return res.sendStatus(400)
+
+    riotApi
+      .get(endpoint(region, 'league/v3/positions/by-summoner/' + summonerId))
       .then(apiRes => {
         const { data } = apiRes
         res.send(data)

@@ -38,8 +38,9 @@ export default class extends React.Component {
       <div>
         <div className="filter">
           <span className="label">Tier:</span>
-          {Object.keys(tiers).map(tier => (
+          {Object.keys(tiers).map((tier, index) => (
             <img
+              key={index}
               onClick={() => this.toggleOpt('tiers', tier)}
               className={'selectable ' + (tiers[tier] && 'active')}
               src={`./static/img/tier_list/base_icons/${tier}.png`}
@@ -49,8 +50,9 @@ export default class extends React.Component {
 
         <div className="filter">
           <span className="label">Looking for: </span>
-          {Object.keys(lookingForOpts).map(lookingFor => (
+          {Object.keys(lookingForOpts).map((lookingFor, index) => (
             <span
+              key={index}
               onClick={() => this.toggleOpt('lookingForOpts', lookingFor)}
               className={'label selectable ' + (lookingForOpts[lookingFor] && 'active')}
             >

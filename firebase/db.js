@@ -29,3 +29,9 @@ export const linkSummonerWithUser = (userId, summonerData, rankedData) => {
     rankedData,
   })
 }
+
+export const updateProfileField = (userId, field, value) => {
+  return db.ref(`users/${userId}/profile`).update({
+    [field]: value,
+  })
+}

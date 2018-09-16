@@ -1,11 +1,12 @@
 import React from 'react'
-import { Container, Row, Col } from 'reactstrap'
+import { Container } from 'reactstrap'
 
 import withAuthorization from '../lib/withAuthorization'
 import Navbar from '../components/Navbar'
 import LoLAccountIntegration from '../components/LoLAccountIntegration'
+import UserDatabaseFieldSelectInput from '../components/UserDatabaseFieldSelectInput'
 
-const AccountPage = props => (
+const AccountPage = ({ user }) => (
   <div className="container-wrapper">
     <Container className="container">
       <Navbar />
@@ -14,6 +15,35 @@ const AccountPage = props => (
 
         <h2>Email</h2>
         <p>dasdas@dasdsa.com</p>
+
+        {user && (
+          <>
+            <h2>Primary role</h2>
+            <UserDatabaseFieldSelectInput userId={user.uid} fieldName="primaryRole">
+              <option>TOP</option>
+              <option>MID</option>
+              <option>BOT</option>
+              <option>ADC</option>
+              <option>SUP</option>
+            </UserDatabaseFieldSelectInput>
+
+            <h2>Secondary role</h2>
+            <UserDatabaseFieldSelectInput userId={user.uid} fieldName="secondaryRole">
+              <option>TOP</option>
+              <option>MID</option>
+              <option>BOT</option>
+              <option>ADC</option>
+              <option>SUP</option>
+            </UserDatabaseFieldSelectInput>
+
+            <h2>Looking for a</h2>
+            <UserDatabaseFieldSelectInput userId={user.uid} fieldName="lookingFor">
+              <option>Duo</option>
+              <option>3v3 Team</option>
+              <option>5v5 Team</option>
+            </UserDatabaseFieldSelectInput>
+          </>
+        )}
 
         <h2>LoL account</h2>
         <LoLAccountIntegration />

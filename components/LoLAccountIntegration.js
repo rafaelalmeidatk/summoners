@@ -1,4 +1,6 @@
 import { connect } from 'react-redux'
+import { Alert } from 'reactstrap'
+import Link from 'next/link'
 import { db } from '../firebase'
 
 class LoLAccountIntegration extends React.Component {
@@ -20,10 +22,22 @@ class LoLAccountIntegration extends React.Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return <div>Loading...</div>
+    }
     return (
       <div>
-        {this.state.loading && <div>Loading...</div>}
-        {!this.state.loading && <div>Summoner linked: {this.state.summonerId ? 'Yes' : 'No'}</div>}
+        {this.state.summonerId && (
+          <Alert color="success">Your summoner is linked with your account!</Alert>
+        )}
+        {!this.state.summonerId && (
+          <Alert color="warning">
+            <p>Oops, seems your don't have an account linked yet.</p>
+            <p>
+              Click <Link href="/account-link">here</Link> to link your account!
+            </p>
+          </Alert>
+        )}
       </div>
     )
   }

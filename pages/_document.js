@@ -1,6 +1,7 @@
 import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '../static/css/style.css'
 
 export default class MyDocument extends Document {
   render() {
@@ -8,7 +9,6 @@ export default class MyDocument extends Document {
       <html>
         <head>
           <link rel="stylesheet" href="/_next/static/style.css" />
-          <link rel="stylesheet" href="./static/css/style.css" />
           <link
             href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700"
             rel="stylesheet"

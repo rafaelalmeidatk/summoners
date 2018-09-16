@@ -23,9 +23,9 @@ const PlayerCard = ({ player, className }) => (
       }
 
       .inner {
-        background: linear-gradient(0deg, rgba(5, 24, 32, 0.8), rgba(5, 24, 32, 0.4));
+        background: linear-gradient(0deg, rgba(5, 24, 32, 0.9), rgba(5, 24, 32, 0.6));
         height: 100%;
-        padding: 15px 15px 70px;
+        padding: 40px 15px 70px;
       }
 
       .name {
@@ -86,6 +86,24 @@ const PlayerCard = ({ player, className }) => (
         margin: auto;
         height: 150px;
       }
+
+      .progress {
+        border-radius: 8px;
+        height: 8px;
+        max-width: 80%;
+        margin: 0 auto;
+        background: #ff5722;
+        margin-bottom: 8px;
+      }
+
+      .progress-bar {
+        background: #8bc34a;
+      }
+
+      .progress-value {
+        font-weight: 500;
+        font-size: 12px;
+      }
     `}</style>
     <div
       className="playerCard"
@@ -97,6 +115,10 @@ const PlayerCard = ({ player, className }) => (
         <span className="header">
           <div className="position">TOP/SUPORT</div>
         </span>
+        <div className="progress">
+          <span className="progress-bar" style={{ width: '50%' }} />
+        </div>
+        <div className="progress-value">64% WIN RATE</div>
         <span className="avatar" />
         <h2 className="name">{player.displayName}</h2>
         <h4 className="rankName">DIAMOND 4</h4>
